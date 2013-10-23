@@ -9,7 +9,6 @@
 
 @interface HelloWorldLayer (PrivateMethods)
 @end
-
 @implementation HelloWorldLayer
 
 -(id) init
