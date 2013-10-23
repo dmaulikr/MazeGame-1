@@ -23,7 +23,7 @@
 											   fontName:@"Arial"
 											   fontSize:20];
 		label.position = [CCDirector sharedDirector].screenCenter;
-		label.color = ccCYAN;
+		label.color = ccRED;
 		[self addChild:label];
 	}
 
