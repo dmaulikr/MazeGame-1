@@ -12,6 +12,7 @@
 
 -(id) initDoor:(bool)d initKey:(bool)k initCheckpoint:(bool)c initNumStepsAllowed:(int)num {
     if ((self = [super init])) {
+        
         isDoor = d;
         isKey = k;
         isCheckpoint = c;

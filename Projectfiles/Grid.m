@@ -13,11 +13,13 @@
 
 -(id) initWidth:(int)w initHeight:(int)h {
     if ((self = [super init])) {
+        
         gameSpace = [[NSMutableArray alloc] init];
         for (int width = 0; width < initWidth; width++) {
+            
             NSMutableArray* subArr = [[NSMutableArray alloc] init];
             for (int height = 0; height < initHeight; height++) {
-                [subArr addObject: [[Tile alloc] initDoor:false initKey:false initCheckpoint:false initNumOfSteps:0]];
+                [subArr addObject: [[TileSpace alloc] initDoor:false initKey:false initCheckpoint:false initNumOfSteps:0]];
             }
             [gameSpace addObject: subArr];
         }
