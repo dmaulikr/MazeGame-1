@@ -15,6 +15,6 @@
     int numStepsAllowed;
 }
 
--(id) initDoor:(bool)d initKey:(bool)k initCheckpoint:(bool)c initNumStepsAllowed:(int)num;
+-(id) initWithDoor:(bool)d initWithKey:(bool)k initWithCheckpoint:(bool)c initWithNumStepsAllowed:(int)num;
 
 @end

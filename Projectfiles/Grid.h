@@ -12,6 +12,6 @@
     NSMutableArray* gameSpace;
 }
 
--(id) initWidth:(int)w initHeight:(int)h;
+-(void) initWidth:(int)w initHeight:(int)h;
 
 @end
