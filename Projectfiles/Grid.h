@@ -13,5 +13,6 @@
 }
 
 -(void) initWidth:(int)w initHeight:(int)h;
+-(void) draw;
 
 @end

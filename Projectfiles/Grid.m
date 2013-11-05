@@ -11,12 +11,16 @@
 
 @implementation Grid
 
-#define WIDTH_TILE 40
-#define HEIGHT_TILE 40
+#define WIDTH_TILE 80
+#define HEIGHT_TILE 80
 #define WIDTH_WINDOW 320
 #define HEIGHT_WINDOW 480
 #define DELAY_IN_SECONDS 0.15
-
+#define Y_OFF_SET 0
+#define HEIGHT_GAME HEIGHT_WINDOW
+#define WIDTH_GAME WIDTH_WINDOW
+#define NUM_ROWS (HEIGHT_GAME / HEIGHT_TILE)
+#define NUM_COLUMNS (WIDTH_GAME / WIDTH_TILE)
 
 -(id) init {
     if ((self = [super init])) {
@@ -39,6 +43,26 @@
         }
         [gameSpace addObject: subArr];
     }
+}
+
+-(void) draw
+{
+    ccColor4F rectColor = ccc4f(0.5, 0.5, 0.5, 1.0); //parameters correspond to red, green, blue, and alpha (transparancy)
+    ccDrawSolidRect(ccp(0,0 + Y_OFF_SET), ccp(WIDTH_GAME, HEIGHT_GAME + Y_OFF_SET), rectColor);
+    
+    
+    glColor4ub(100,0,255,255);
+    for(int row = 0; row < HEIGHT_GAME; row += WIDTH_TILE)
+    {
+        ccDrawLine(ccp(0, row + Y_OFF_SET), ccp(WIDTH_GAME, row + Y_OFF_SET));
+        
+    }
+    
+    for(int col = 0; col <= WIDTH_GAME; col += WIDTH_TILE)
+    {
+        ccDrawLine(ccp(col, 0 + Y_OFF_SET), ccp(col, HEIGHT_GAME + Y_OFF_SET));
+    }
+    
 }
 
 -(void) update: (ccTime) delta
