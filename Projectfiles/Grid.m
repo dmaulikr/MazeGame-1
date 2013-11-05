@@ -43,7 +43,27 @@
 
 -(void) update: (ccTime) delta
 {
-    //sense the gestures
+    KKInput* input = [KKInput sharedInput];
+    input.gestureSwipeEnabled = YES;
+    
+    if (input.gestureSwipeRecognizedThisFrame) {
+        KKSwipeGestureDirection dir = input.gestureSwipeDirection;
+        switch (dir) {
+            case KKSwipeGestureDirectionDown:
+                NSLog(@"Swipe down detected");
+                break;
+            case KKSwipeGestureDirectionLeft:
+                NSLog(@"Swipe left detected");
+                break;
+            case KKSwipeGestureDirectionRight:
+                NSLog(@"Swipe right detected");
+                break;
+            case KKSwipeGestureDirectionUp:
+                NSLog(@"Swipe up detected");
+                break;
+        }
+    }
+
 }
 
 -(void) nextFrame
