@@ -32,13 +32,16 @@
     return self;
 }
 
--(void) initWidth:(int)w initHeight:(int)h {
-        
+-(void) initLevel: (NSString*) levelFile {
+    
+    NSDictionary* level = [NSDictionary dictionaryWithContentsOfFile: levelFile];
+    int w = [[level objectForKey:@"width"] integerValue];
+    int h = [[level objectForKey:@"height"] integerValue];
     gameSpace = [[NSMutableArray alloc] init];
-    for (int width = 0; width < w; width++) {
+    for (int gridWidth = 0; gridWidth < w; gridWidth++) {
         
         NSMutableArray* subArr = [[NSMutableArray alloc] init];
-        for (int height = 0; height < h; height++) {
+        for (int gridHeight = 0; gridHeight < h; gridHeight++) {
             [subArr addObject: [[TileSpace alloc] initWithDoor:false initWithKey:false
                                             initWithCheckpoint:false initWithPlayer:false initWithNumStepsAllowed:0]];
         }

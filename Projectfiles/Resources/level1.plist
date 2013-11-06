@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>width</key>
+	<integer>5</integer>
+	<key>height</key>
+	<integer>5</integer>
 	<key>r1</key>
 	<array>
 		<string>0</string>
