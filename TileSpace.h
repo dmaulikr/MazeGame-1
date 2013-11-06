@@ -12,9 +12,10 @@
     bool isDoor;
     bool isKey;
     bool isCheckpoint;
+    bool hasPlayer;
     int numStepsAllowed;
 }
 
--(id) initWithDoor:(bool)d initWithKey:(bool)k initWithCheckpoint:(bool)c initWithNumStepsAllowed:(int)num;
+-(id) initWithDoor:(bool)d initWithKey:(bool)k initWithCheckpoint:(bool)c initWithPlayer:(bool)p initWithNumStepsAllowed:(int)num;
 
 @end

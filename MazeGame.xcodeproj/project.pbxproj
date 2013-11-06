@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C462F6BB182AFA0100BDF67D /* level1.plist in Resources */ = {isa = PBXBuildFile; fileRef = C462F6BA182AFA0100BDF67D /* level1.plist */; };
 		C4933437182232CE00E764BB /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = C4933436182232CE00E764BB /* Grid.m */; };
 		C493343A18223A0100E764BB /* TileSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = C493343918223A0100E764BB /* TileSpace.m */; };
 		DC21B88B1511078F00FD4891 /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DC21B8881511078F00FD4891 /* fps_images-hd.png */; };
@@ -53,6 +54,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C462F6BA182AFA0100BDF67D /* level1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level1.plist; sourceTree = "<group>"; };
 		C4933435182232CE00E764BB /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
 		C4933436182232CE00E764BB /* Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grid.m; sourceTree = "<group>"; };
 		C493343818223A0100E764BB /* TileSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TileSpace.h; path = ../TileSpace.h; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				DCC1A39513A94F1A005BD75D /* config.lua */,
+				C462F6BA182AFA0100BDF67D /* level1.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				DCC1A10613A94ED5005BD75D /* Icon.png in Resources */,
 				DCC1A10813A94ED5005BD75D /* Icon@2x.png in Resources */,
 				DCC1A3AF13A94F1A005BD75D /* config.lua in Resources */,
+				C462F6BB182AFA0100BDF67D /* level1.plist in Resources */,
 				DC21B88B1511078F00FD4891 /* fps_images-hd.png in Resources */,
 				DC21B88C1511078F00FD4891 /* fps_images-ipadhd.png in Resources */,
 				DC21B88D1511078F00FD4891 /* fps_images.png in Resources */,

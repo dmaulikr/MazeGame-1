@@ -39,7 +39,8 @@
         
         NSMutableArray* subArr = [[NSMutableArray alloc] init];
         for (int height = 0; height < h; height++) {
-            [subArr addObject: [[TileSpace alloc] initWithDoor:false initWithKey:false initWithCheckpoint:false initWithNumStepsAllowed:0]];
+            [subArr addObject: [[TileSpace alloc] initWithDoor:false initWithKey:false
+                                            initWithCheckpoint:false initWithPlayer:false initWithNumStepsAllowed:0]];
         }
         [gameSpace addObject: subArr];
     }
@@ -95,7 +96,7 @@
     //will call all updates for the next frame after a swipe gesture
 }
 
--(void)updateGrid
+-(void) updateGrid
 {
     //updates the grid array after there is a move
 }
