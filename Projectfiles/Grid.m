@@ -37,16 +37,31 @@
     NSDictionary* level = [NSDictionary dictionaryWithContentsOfFile: levelFile];
     int w = [[level objectForKey:@"width"] integerValue];
     int h = [[level objectForKey:@"height"] integerValue];
+    NSArray* start = [level objectForKey:@"start"];
+    NSArray* door = [level objectForKey:@"door"];
+    NSArray* key = [level objectForKey:@"key"];
+    NSArray* levelLayout = [level objectForKey:@"levelLayout"];
+    
     gameSpace = [[NSMutableArray alloc] init];
     for (int gridWidth = 0; gridWidth < w; gridWidth++) {
         
+        NSNumber* nGridWidth = [NSNumber numberWithInt:gridWidth];
         NSMutableArray* subArr = [[NSMutableArray alloc] init];
         for (int gridHeight = 0; gridHeight < h; gridHeight++) {
-            [subArr addObject: [[TileSpace alloc] initWithDoor:false initWithKey:false
-                                            initWithCheckpoint:false initWithPlayer:false initWithNumStepsAllowed:0]];
+            
+            NSNumber* nGridHeight = [NSNumber numberWithInt:gridHeight];
+            [subArr addObject:
+             [[TileSpace alloc] initWithDoor:false initWithKey:false
+                                initWithCheckpoint:false initWithPlayer:false
+                                initWithNumStepsAllowed:
+                                    [[levelLayout objectAtIndex:nGridWidth]
+                                                objectAtIndex:nGridHeight]]];
         }
         [gameSpace addObject: subArr];
     }
+    [[[gameSpace objectAtIndex:[key objectAtIndex:@0]] objectAtIndex:[key objectAtIndex:@1]] setKey:true];
+    [[[gameSpace objectAtIndex:[start objectAtIndex:@0]] objectAtIndex:[start objectAtIndex:@1]] setPlayer:true];
+    [[[gameSpace objectAtIndex:[door objectAtIndex:@0]] objectAtIndex:[door objectAtIndex:@1]] setDoor:true];
 }
 
 -(void) draw
@@ -56,14 +71,12 @@
     
     
     glColor4ub(100,0,255,255);
-    for(int row = 0; row < HEIGHT_GAME; row += WIDTH_TILE)
-    {
+    for (int row = 0; row < HEIGHT_GAME; row += WIDTH_TILE) {
         ccDrawLine(ccp(0, row + Y_OFF_SET), ccp(WIDTH_GAME, row + Y_OFF_SET));
         
     }
     
-    for(int col = 0; col <= WIDTH_GAME; col += WIDTH_TILE)
-    {
+    for (int col = 0; col <= WIDTH_GAME; col += WIDTH_TILE) {
         ccDrawLine(ccp(col, 0 + Y_OFF_SET), ccp(col, HEIGHT_GAME + Y_OFF_SET));
     }
     

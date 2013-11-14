@@ -2,49 +2,62 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>key</key>
+	<array>
+		<integer>4</integer>
+		<integer>4</integer>
+	</array>
+	<key>door</key>
+	<array>
+		<integer>0</integer>
+		<integer>4</integer>
+	</array>
+	<key>start</key>
+	<array>
+		<integer>4</integer>
+		<integer>0</integer>
+	</array>
 	<key>width</key>
 	<integer>5</integer>
 	<key>height</key>
 	<integer>5</integer>
-	<key>r1</key>
+	<key>levelLayout</key>
 	<array>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
-		<string>d</string>
-	</array>
-	<key>r2</key>
-	<array>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
-		<string>1</string>
-	</array>
-	<key>r3</key>
-	<array>
-		<string>1</string>
-		<string>1</string>
-		<string>2</string>
-		<string>1</string>
-		<string>1</string>
-	</array>
-	<key>r4</key>
-	<array>
-		<string>1</string>
-		<string>0</string>
-		<string>2</string>
-		<string>0</string>
-		<string>0</string>
-	</array>
-	<key>r5</key>
-	<array>
-		<string>s</string>
-		<string>0</string>
-		<string>2</string>
-		<string>k</string>
-		<string>0</string>
+		<array>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>1</integer>
+		</array>
+		<array>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+			<integer>1</integer>
+		</array>
+		<array>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>2</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+		</array>
+		<array>
+			<integer>1</integer>
+			<integer>0</integer>
+			<integer>2</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+		</array>
+		<array>
+			<integer>1</integer>
+			<integer>0</integer>
+			<integer>2</integer>
+			<integer>1</integer>
+			<integer>0</integer>
+		</array>
 	</array>
 </dict>
 </plist>
