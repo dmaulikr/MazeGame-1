@@ -19,6 +19,19 @@
         hasPlayer = p;
         numStepsAllowed = num;
     }
+    
+    return self;
 }
+
+-(void) setDoor:(bool)d { isDoor = d; }
+-(void) setKey:(bool)k { isKey = k; }
+-(void) setCheckpoint:(bool)c { isCheckpoint = c; }
+-(void) setPlayer:(bool)p { hasPlayer = p; }
+-(void) setNumStepsAllowed:(int)num { numStepsAllowed = num; }
+-(bool) isDoor { return isDoor; }
+-(bool) isKey { return isKey; }
+-(bool) isCheckpoint { return isCheckpoint; }
+-(bool) hasPlayer { return hasPlayer; }
+-(bool) getNumSteps { return numStepsAllowed; }
 
 @end

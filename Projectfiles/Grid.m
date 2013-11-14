@@ -33,18 +33,39 @@ bool endLevel = false;
     return self;
 }
 
--(void) initWidth:(int)w initHeight:(int)h {
-        
+-(void) initLevel: (NSString*) levelFile {
+    
+    NSDictionary* level = [NSDictionary dictionaryWithContentsOfFile: levelFile];
+    int w = [[level objectForKey:@"width"] integerValue];
+    int h = [[level objectForKey:@"height"] integerValue];
+    NSArray* start = [level objectForKey:@"start"];
+    NSArray* door = [level objectForKey:@"door"];
+    NSArray* key = [level objectForKey:@"key"];
+    NSArray* levelLayout = [level objectForKey:@"levelLayout"];
+    
     gameSpace = [[NSMutableArray alloc] init];
-    for (int width = 0; width < w; width++) {
+    for (int gridWidth = 0; gridWidth < w; gridWidth++) {
         
+        NSNumber* nGridWidth = [NSNumber numberWithInt:gridWidth];
         NSMutableArray* subArr = [[NSMutableArray alloc] init];
-        for (int height = 0; height < h; height++) {
-            [subArr addObject: [[TileSpace alloc] initWithDoor:false initWithKey:false initWithCheckpoint:false initWithPlayer:false initWithNumStepsAllowed:1]];
-
+        for (int gridHeight = 0; gridHeight < h; gridHeight++) {
+            
+            NSNumber* nGridHeight = [NSNumber numberWithInt:gridHeight];
+            [subArr addObject:
+             [[TileSpace alloc] initWithDoor:false initWithKey:false
+                                initWithCheckpoint:false initWithPlayer:false
+                                initWithNumStepsAllowed:
+                                    [[[levelLayout
+                                       objectAtIndex:nGridWidth]
+                                       objectAtIndex:nGridHeight]
+                                        integerValue]
+              ]];
         }
         [gameSpace addObject: subArr];
     }
+    [[[gameSpace objectAtIndex:[key objectAtIndex:@0]] objectAtIndex:[key objectAtIndex:@1]] setKey:true];
+    [[[gameSpace objectAtIndex:[start objectAtIndex:@0]] objectAtIndex:[start objectAtIndex:@1]] setPlayer:true];
+    [[[gameSpace objectAtIndex:[door objectAtIndex:@0]] objectAtIndex:[door objectAtIndex:@1]] setDoor:true];
 }
 
 -(void) draw
@@ -59,8 +80,7 @@ bool endLevel = false;
         
     }
     
-    for(int col = 0; col <= WIDTH_GAME; col += WIDTH_TILE)
-    {
+    for (int col = 0; col <= WIDTH_GAME; col += WIDTH_TILE) {
         ccDrawLine(ccp(col, 0 + Y_OFF_SET), ccp(col, HEIGHT_GAME + Y_OFF_SET));
     }
     

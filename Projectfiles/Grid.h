@@ -12,7 +12,7 @@
     NSMutableArray* gameSpace;
 }
 
--(void) initWidth:(int)w initHeight:(int)h;
+-(void) initLevel: (NSString*) levelFile;
 -(void) draw;
 
 @end
