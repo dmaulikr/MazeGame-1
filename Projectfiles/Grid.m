@@ -54,8 +54,11 @@
              [[TileSpace alloc] initWithDoor:false initWithKey:false
                                 initWithCheckpoint:false initWithPlayer:false
                                 initWithNumStepsAllowed:
-                                    [[levelLayout objectAtIndex:nGridWidth]
-                                                objectAtIndex:nGridHeight]]];
+                                    [[[levelLayout
+                                       objectAtIndex:nGridWidth]
+                                       objectAtIndex:nGridHeight]
+                                        integerValue]
+              ]];
         }
         [gameSpace addObject: subArr];
     }
