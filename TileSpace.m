@@ -10,12 +10,13 @@
 
 @implementation TileSpace
 
--(id) initWithDoor:(bool)d initWithKey:(bool)k initWithCheckpoint:(bool)c initWithNumStepsAllowed:(int)num {
+-(id) initWithDoor:(bool)d initWithKey:(bool)k initWithCheckpoint:(bool)c initWithPlayer:(bool)p initWithNumStepsAllowed:(int)num {
     if ((self = [super init])) {
         
         isDoor = d;
         isKey = k;
         isCheckpoint = c;
+        hasPlayer = p;
         numStepsAllowed = num;
     }
 }

@@ -21,14 +21,15 @@
 #define WIDTH_GAME WIDTH_WINDOW
 #define NUM_ROWS (HEIGHT_GAME / HEIGHT_TILE)
 #define NUM_COLUMNS (WIDTH_GAME / WIDTH_TILE)
+bool endLevel = false;
 
 -(id) init {
     if ((self = [super init])) {
         
+        [self schedule:@selector(nextFrame) interval:DELAY_IN_SECONDS];
+        [self scheduleUpdate];
         
     }
-    [self schedule:@selector(nextFrame) interval:DELAY_IN_SECONDS];
-    [self scheduleUpdate];
     return self;
 }
 
@@ -39,7 +40,8 @@
         
         NSMutableArray* subArr = [[NSMutableArray alloc] init];
         for (int height = 0; height < h; height++) {
-            [subArr addObject: [[TileSpace alloc] initWithDoor:false initWithKey:false initWithCheckpoint:false initWithNumStepsAllowed:0]];
+            [subArr addObject: [[TileSpace alloc] initWithDoor:false initWithKey:false initWithCheckpoint:false initWithPlayer:false initWithNumStepsAllowed:1]];
+
         }
         [gameSpace addObject: subArr];
     }
@@ -51,7 +53,6 @@
     ccDrawSolidRect(ccp(0,0 + Y_OFF_SET), ccp(WIDTH_GAME, HEIGHT_GAME + Y_OFF_SET), rectColor);
     
     
-    glColor4ub(100,0,255,255);
     for(int row = 0; row < HEIGHT_GAME; row += WIDTH_TILE)
     {
         ccDrawLine(ccp(0, row + Y_OFF_SET), ccp(WIDTH_GAME, row + Y_OFF_SET));
@@ -75,6 +76,7 @@
         switch (dir) {
             case KKSwipeGestureDirectionDown:
                 NSLog(@"Swipe down detected");
+                
                 break;
             case KKSwipeGestureDirectionLeft:
                 NSLog(@"Swipe left detected");
@@ -92,10 +94,10 @@
 
 -(void) nextFrame
 {
-    //will call all updates for the next frame after a swipe gesture
+    
 }
 
--(void)updateGrid
+-(void) updateGrid
 {
     //updates the grid array after there is a move
 }
