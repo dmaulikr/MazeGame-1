@@ -10,10 +10,10 @@
 
 @interface Grid : CCLayer {
     NSMutableArray* gameSpace;
-    NSNumber* playerLocX;
-    NSNumber* playerLocY;
-    NSNumber* checkpointX;
-    NSNumber* checkpointY;
+    int playerLocX;
+    int playerLocY;
+    int checkpointX;
+    int checkpointY;
     bool hasCheckpoint;
     bool hasKey;
 }

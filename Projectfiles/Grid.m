@@ -65,8 +65,8 @@ bool endLevel = false;
     }
     [[[gameSpace objectAtIndex:[key objectAtIndex:@0]] objectAtIndex:[key objectAtIndex:@1]] setKey:true];
     [[[gameSpace objectAtIndex:[start objectAtIndex:@0]] objectAtIndex:[start objectAtIndex:@1]] setPlayer:true];
-    playerLocX = [start objectAtIndex:@0];
-    playerLocY = [start objectAtIndex:@1];
+    playerLocX = [start objectAtIndex:0];
+    playerLocY = [start objectAtIndex:1];
     [[[gameSpace objectAtIndex:[door objectAtIndex:@0]] objectAtIndex:[door objectAtIndex:@1]] setDoor:true];
 }
 
@@ -97,20 +97,18 @@ bool endLevel = false;
     if (input.gestureSwipeRecognizedThisFrame) {
         KKSwipeGestureDirection dir = input.gestureSwipeDirection;
         [playerTile decrementOne];
-        int intPlayerLocX = [playerLocX integerValue];
-        int intPlayerLocY = [playerLocY integerValue];
         switch (dir) {
             case KKSwipeGestureDirectionDown:
-                playerLocY = [NSNumber numberWithInt:intPlayerLocY - 1];
+                playerLocY--;
                 break;
             case KKSwipeGestureDirectionLeft:
-                playerLocX = [NSNumber numberWithInt:intPlayerLocX - 1];
+                playerLocX--;
                 break;
             case KKSwipeGestureDirectionRight:
-                playerLocX = [NSNumber numberWithInt:intPlayerLocX + 1];
+                playerLocX++;
                 break;
             case KKSwipeGestureDirectionUp:
-                playerLocY = [NSNumber numberWithInt:intPlayerLocY + 1];
+                playerLocY++;
                 break;
         }
         playerTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
