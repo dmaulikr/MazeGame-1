@@ -82,7 +82,6 @@ bool endLevel = false;
     for (int col = 0; col <= WIDTH_GAME; col += WIDTH_TILE) {
         ccDrawLine(ccp(col, 0 + Y_OFF_SET), ccp(col, HEIGHT_GAME + Y_OFF_SET));
     }
-    
 }
 
 -(void) update: (ccTime) delta
@@ -90,22 +89,35 @@ bool endLevel = false;
     KKInput* input = [KKInput sharedInput];
     input.gestureSwipeEnabled = YES;
     
+    TileSpace* playerTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
+    
     if (input.gestureSwipeRecognizedThisFrame) {
         KKSwipeGestureDirection dir = input.gestureSwipeDirection;
+        [playerTile decrementOne];
         switch (dir) {
             case KKSwipeGestureDirectionDown:
-                NSLog(@"Swipe down detected");
-                
+                playerLocY--;
                 break;
             case KKSwipeGestureDirectionLeft:
-                NSLog(@"Swipe left detected");
+                playerLocX--;
                 break;
             case KKSwipeGestureDirectionRight:
-                NSLog(@"Swipe right detected");
+                playerLocX++;
                 break;
             case KKSwipeGestureDirectionUp:
-                NSLog(@"Swipe up detected");
+                playerLocY++;
                 break;
+        }
+        playerTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
+        if ([playerTile getNumSteps] < 0) { /* game over the player fell */ }
+        else {
+            if ([playerTile isKey]) { hasKey = true; }
+            if ([playerTile isCheckpoint]) {
+                checkpointX = playerLocX;
+                checkpointY = playerLocY;
+                hasCheckpoint = true;
+            }
+            [playerTile setPlayer:true];
         }
     }
 
