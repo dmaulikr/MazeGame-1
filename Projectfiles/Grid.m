@@ -65,6 +65,8 @@ bool endLevel = false;
     }
     [[[gameSpace objectAtIndex:[key objectAtIndex:@0]] objectAtIndex:[key objectAtIndex:@1]] setKey:true];
     [[[gameSpace objectAtIndex:[start objectAtIndex:@0]] objectAtIndex:[start objectAtIndex:@1]] setPlayer:true];
+    playerLocX = [start objectAtIndex:@0];
+    playerLocY = [start objectAtIndex:@1];
     [[[gameSpace objectAtIndex:[door objectAtIndex:@0]] objectAtIndex:[door objectAtIndex:@1]] setDoor:true];
 }
 
@@ -83,7 +85,6 @@ bool endLevel = false;
     for (int col = 0; col <= WIDTH_GAME; col += WIDTH_TILE) {
         ccDrawLine(ccp(col, 0 + Y_OFF_SET), ccp(col, HEIGHT_GAME + Y_OFF_SET));
     }
-    
 }
 
 -(void) update: (ccTime) delta
@@ -91,23 +92,31 @@ bool endLevel = false;
     KKInput* input = [KKInput sharedInput];
     input.gestureSwipeEnabled = YES;
     
+    TileSpace* playerTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
+    
     if (input.gestureSwipeRecognizedThisFrame) {
         KKSwipeGestureDirection dir = input.gestureSwipeDirection;
+        [playerTile decrementOne];
+        int intPlayerLocX = [playerLocX integerValue];
+        int intPlayerLocY = [playerLocY integerValue];
         switch (dir) {
             case KKSwipeGestureDirectionDown:
-                NSLog(@"Swipe down detected");
-                
+                playerLocY = [NSNumber numberWithInt:intPlayerLocY - 1];
                 break;
             case KKSwipeGestureDirectionLeft:
-                NSLog(@"Swipe left detected");
+                playerLocX = [NSNumber numberWithInt:intPlayerLocX - 1];
                 break;
             case KKSwipeGestureDirectionRight:
-                NSLog(@"Swipe right detected");
+                playerLocX = [NSNumber numberWithInt:intPlayerLocX + 1];
                 break;
             case KKSwipeGestureDirectionUp:
-                NSLog(@"Swipe up detected");
+                playerLocY = [NSNumber numberWithInt:intPlayerLocY + 1];
                 break;
         }
+        playerTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
+        if ([playerTile getNumSteps] < 0) { /* game over the player fell */ }
+        else if ([playerTile isKey]) { hasKey = true; }
+        else { [playerTile setPlayer:true]; }
     }
 
 }

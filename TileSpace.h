@@ -22,11 +22,12 @@
 -(void) setCheckpoint:(bool)c;
 -(void) setPlayer:(bool)p;
 -(void) setNumStepsAllowed:(int)num;
+-(void) decrementOne;
 -(bool) isDoor;
 -(bool) isKey;
 -(bool) isCheckpoint;
 -(bool) hasPlayer;
--(bool) getNumSteps;
+-(int) getNumSteps;
 
 
 @end

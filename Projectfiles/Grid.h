@@ -10,9 +10,13 @@
 
 @interface Grid : CCLayer {
     NSMutableArray* gameSpace;
+    NSNumber* playerLocX;
+    NSNumber* playerLocY;
+    bool hasKey;
 }
 
 -(void) initLevel: (NSString*) levelFile;
 -(void) draw;
+-(void) update: (ccTime) delta;
 
 @end
