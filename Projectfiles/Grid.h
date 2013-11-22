@@ -12,6 +12,9 @@
     NSMutableArray* gameSpace;
     NSNumber* playerLocX;
     NSNumber* playerLocY;
+    NSNumber* checkpointX;
+    NSNumber* checkpointY;
+    bool hasCheckpoint;
     bool hasKey;
 }
 

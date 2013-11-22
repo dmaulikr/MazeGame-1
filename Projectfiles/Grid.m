@@ -115,8 +115,15 @@ bool endLevel = false;
         }
         playerTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
         if ([playerTile getNumSteps] < 0) { /* game over the player fell */ }
-        else if ([playerTile isKey]) { hasKey = true; }
-        else { [playerTile setPlayer:true]; }
+        else {
+            if ([playerTile isKey]) { hasKey = true; }
+            if ([playerTile isCheckpoint]) {
+                checkpointX = playerLocX;
+                checkpointY = playerLocY;
+                hasCheckpoint = true;
+            }
+            [playerTile setPlayer:true];
+        }
     }
 
 }
