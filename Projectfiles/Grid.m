@@ -65,8 +65,8 @@ bool endLevel = false;
     }
     [[[gameSpace objectAtIndex:[key objectAtIndex:@0]] objectAtIndex:[key objectAtIndex:@1]] setKey:true];
     [[[gameSpace objectAtIndex:[start objectAtIndex:@0]] objectAtIndex:[start objectAtIndex:@1]] setPlayer:true];
-    playerLocX = [start objectAtIndex:0];
-    playerLocY = [start objectAtIndex:1];
+    playerLocX = [start objectAtIndex:@0];
+    playerLocY = [start objectAtIndex:@1];
     [[[gameSpace objectAtIndex:[door objectAtIndex:@0]] objectAtIndex:[door objectAtIndex:@1]] setDoor:true];
 }
 
