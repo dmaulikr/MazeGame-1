@@ -27,6 +27,7 @@ bool endLevel = false;
     if ((self = [super init])) {
         
         [self schedule:@selector(nextFrame) interval:DELAY_IN_SECONDS];
+        [self initLevel:@"level1.plist"];
         [self scheduleUpdate];
         
     }
@@ -46,26 +47,24 @@ bool endLevel = false;
     gameSpace = [[NSMutableArray alloc] init];
     for (int gridWidth = 0; gridWidth < w; gridWidth++) {
         
-        NSNumber* nGridWidth = [NSNumber numberWithInt:gridWidth];
         NSMutableArray* subArr = [[NSMutableArray alloc] init];
         for (int gridHeight = 0; gridHeight < h; gridHeight++) {
             
-            NSNumber* nGridHeight = [NSNumber numberWithInt:gridHeight];
             [subArr addObject:
              [[TileSpace alloc] initWithDoor:false initWithKey:false
                                 initWithCheckpoint:false initWithPlayer:false
                                 initWithNumStepsAllowed:
                                     [[[levelLayout
-                                       objectAtIndex:nGridWidth]
-                                       objectAtIndex:nGridHeight]
+                                       objectAtIndex:gridWidth]
+                                       objectAtIndex:gridHeight]
                                         integerValue]
               ]];
         }
         [gameSpace addObject: subArr];
     }
-    [[[gameSpace objectAtIndex:[key objectAtIndex:@0]] objectAtIndex:[key objectAtIndex:@1]] setKey:true];
-    [[[gameSpace objectAtIndex:[start objectAtIndex:@0]] objectAtIndex:[start objectAtIndex:@1]] setPlayer:true];
-    [[[gameSpace objectAtIndex:[door objectAtIndex:@0]] objectAtIndex:[door objectAtIndex:@1]] setDoor:true];
+    [[[gameSpace objectAtIndex:[[key objectAtIndex:0] integerValue]] objectAtIndex:[[key objectAtIndex:1] integerValue]] setKey:true];
+    [[[gameSpace objectAtIndex:[[start objectAtIndex:0] integerValue]] objectAtIndex:[[start objectAtIndex:1] integerValue]] setPlayer:true];
+    [[[gameSpace objectAtIndex:[[door objectAtIndex:0] integerValue]] objectAtIndex:[[door objectAtIndex:1] integerValue]] setDoor:true];
 }
 
 -(void) draw
