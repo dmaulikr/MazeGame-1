@@ -14,6 +14,8 @@
     int playerLocY;
     int checkpointX;
     int checkpointY;
+    int maxX;
+    int maxY;
     bool hasCheckpoint;
     bool hasKey;
 }

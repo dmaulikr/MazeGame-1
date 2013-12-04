@@ -37,18 +37,18 @@ bool endLevel = false;
 -(void) initLevel: (NSString*) levelFile {
     
     NSDictionary* level = [NSDictionary dictionaryWithContentsOfFile: levelFile];
-    int w = [[level objectForKey:@"width"] integerValue];
-    int h = [[level objectForKey:@"height"] integerValue];
+    maxX = [[level objectForKey:@"width"] integerValue];
+    maxY = [[level objectForKey:@"height"] integerValue];
     NSArray* start = [level objectForKey:@"start"];
     NSArray* door = [level objectForKey:@"door"];
     NSArray* key = [level objectForKey:@"key"];
     NSArray* levelLayout = [level objectForKey:@"levelLayout"];
     
     gameSpace = [[NSMutableArray alloc] init];
-    for (int gridWidth = 0; gridWidth < w; gridWidth++) {
+    for (int gridWidth = 0; gridWidth < maxX; gridWidth++) {
         
         NSMutableArray* subArr = [[NSMutableArray alloc] init];
-        for (int gridHeight = 0; gridHeight < h; gridHeight++) {
+        for (int gridHeight = 0; gridHeight < maxY; gridHeight++) {
             
             [subArr addObject:
              [[TileSpace alloc] initWithDoor:false initWithKey:false
@@ -64,6 +64,8 @@ bool endLevel = false;
     }
     [[[gameSpace objectAtIndex:[[key objectAtIndex:0] integerValue]] objectAtIndex:[[key objectAtIndex:1] integerValue]] setKey:true];
     [[[gameSpace objectAtIndex:[[start objectAtIndex:0] integerValue]] objectAtIndex:[[start objectAtIndex:1] integerValue]] setPlayer:true];
+    playerLocX = [[start objectAtIndex:0] integerValue];
+    playerLocY = [[start objectAtIndex:1] integerValue];
     [[[gameSpace objectAtIndex:[[door objectAtIndex:0] integerValue]] objectAtIndex:[[door objectAtIndex:1] integerValue]] setDoor:true];
 }
 
@@ -96,16 +98,16 @@ bool endLevel = false;
         [playerTile decrementOne];
         switch (dir) {
             case KKSwipeGestureDirectionDown:
-                playerLocY--;
+                if (playerLocY > 0) { playerLocY--; }
                 break;
             case KKSwipeGestureDirectionLeft:
-                playerLocX--;
+                if (playerLocX > 0) { playerLocX--; }
                 break;
             case KKSwipeGestureDirectionRight:
-                playerLocX++;
+                if (playerLocX < maxX - 1) { playerLocX++; }
                 break;
             case KKSwipeGestureDirectionUp:
-                playerLocY++;
+                if (playerLocY < maxY - 1) { playerLocY++; }
                 break;
         }
         playerTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
@@ -116,6 +118,10 @@ bool endLevel = false;
                 checkpointX = playerLocX;
                 checkpointY = playerLocY;
                 hasCheckpoint = true;
+            }
+            if ([playerTile isDoor]) {
+                if (hasKey) { /* game over player won */ }
+                else { /* let them know they need to get the key */ }
             }
             [playerTile setPlayer:true];
         }
