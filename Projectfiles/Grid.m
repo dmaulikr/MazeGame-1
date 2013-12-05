@@ -27,7 +27,8 @@ bool endLevel = false;
     if ((self = [super init])) {
         
         [self schedule:@selector(nextFrame) interval:DELAY_IN_SECONDS];
-        [self initLevel:@"level1.plist"];
+        levelFile = @"level1.plist";
+        [self initLevel:levelFile];
         [self scheduleUpdate];
         
     }
@@ -67,22 +68,42 @@ bool endLevel = false;
     playerLocX = [[start objectAtIndex:0] integerValue];
     playerLocY = [[start objectAtIndex:1] integerValue];
     [[[gameSpace objectAtIndex:[[door objectAtIndex:0] integerValue]] objectAtIndex:[[door objectAtIndex:1] integerValue]] setDoor:true];
+
 }
 
 -(void) draw
 {
-    ccColor4F rectColor = ccc4f(0.5, 0.5, 0.5, 1.0); //parameters correspond to red, green, blue, and alpha (transparancy)
-    ccDrawSolidRect(ccp(0,0 + Y_OFF_SET), ccp(WIDTH_GAME, HEIGHT_GAME + Y_OFF_SET), rectColor);
-    
+    ccColor4F red = ccc4f(1.0, 0.0, 0.0, 1.0); //parameters correspond to red, green, blue, and alpha (transparancy)
+    ccColor4F blue = ccc4f(0.0, 0.0, 1.0, 1.0);
+    ccColor4F green = ccc4f(0.0, 1.0, 0.0, 1.0);
+    ccColor4F yellow = ccc4f(1.0, 1.0, 0.0, 1.0);
+    ccColor4F white = ccc4f(1.0, 1.0, 1.0, 1.0);
+    ccColor4F brown = ccc4f(0.5, 0.25, 0.0, 1.0);
+    NSDictionary* level = [NSDictionary dictionaryWithContentsOfFile: levelFile];
+    NSArray* keyLoc = [level objectForKey:@"key"];
+    NSArray* doorLoc = [level objectForKey:@"door"];
+    NSArray* startLoc = [level objectForKey:@"start"];
+    NSArray* levelLayout = [level objectForKey:@"levelLayout"];
     
     for(int row = 0; row < HEIGHT_GAME; row += WIDTH_TILE)
     {
         ccDrawLine(ccp(0, row + Y_OFF_SET), ccp(WIDTH_GAME, row + Y_OFF_SET));
-        
     }
     
     for (int col = 0; col <= WIDTH_GAME; col += WIDTH_TILE) {
         ccDrawLine(ccp(col, 0 + Y_OFF_SET), ccp(col, HEIGHT_GAME + Y_OFF_SET));
+    }
+    
+    for (int row = 0; row < NUM_COLUMNS; row += 1) {
+        for (int col = 0; col < NUM_ROWS; col += 1) {
+            if (col == [keyLoc[0] integerValue] && row == [keyLoc[1] integerValue]) {
+                ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), yellow);
+            } else if (col == [doorLoc[0] integerValue] && row == [doorLoc[1] integerValue]) {
+                ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), brown);
+            } else {
+                ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), blue);
+            }
+        }
     }
 }
 
