@@ -18,6 +18,7 @@
     int maxY;
     bool hasCheckpoint;
     bool hasKey;
+    NSString* levelFile;
 }
 
 -(void) initLevel: (NSString*) levelFile;
