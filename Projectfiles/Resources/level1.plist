@@ -4,13 +4,13 @@
 <dict>
 	<key>key</key>
 	<array>
-		<integer>3</integer>
+		<integer>2</integer>
 		<integer>0</integer>
 	</array>
 	<key>door</key>
 	<array>
-		<integer>4</integer>
-		<integer>4</integer>
+		<integer>3</integer>
+		<integer>5</integer>
 	</array>
 	<key>start</key>
 	<array>
@@ -18,44 +18,41 @@
 		<integer>0</integer>
 	</array>
 	<key>width</key>
-	<integer>5</integer>
+	<integer>4</integer>
 	<key>height</key>
-	<integer>5</integer>
+	<integer>6</integer>
 	<key>levelLayout</key>
 	<array>
 		<array>
 			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
 			<integer>0</integer>
+			<integer>0</integer>
+			<integer>0</integer>
+		</array>
+		<array>
 			<integer>2</integer>
-			<integer>1</integer>
-			<integer>0</integer>
-		</array>
-		<array>
-			<integer>1</integer>
-			<integer>0</integer>
+			<integer>2</integer>
 			<integer>2</integer>
 			<integer>0</integer>
 			<integer>0</integer>
+			<integer>0</integer>
 		</array>
 		<array>
 			<integer>1</integer>
+			<integer>0</integer>
 			<integer>1</integer>
-			<integer>2</integer>
-			<integer>1</integer>
-			<integer>1</integer>
-		</array>
-		<array>
 			<integer>0</integer>
 			<integer>0</integer>
 			<integer>0</integer>
-			<integer>0</integer>
-			<integer>1</integer>
 		</array>
 		<array>
 			<integer>0</integer>
 			<integer>0</integer>
-			<integer>0</integer>
-			<integer>0</integer>
+			<integer>1</integer>
+			<integer>1</integer>
+			<integer>1</integer>
 			<integer>1</integer>
 		</array>
 	</array>
