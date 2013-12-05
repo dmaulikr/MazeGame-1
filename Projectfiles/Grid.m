@@ -11,6 +11,7 @@
 
 @implementation Grid
 
+NSMutableArray* levelLayout;
 #define WIDTH_TILE 80
 #define HEIGHT_TILE 80
 #define WIDTH_WINDOW 320
@@ -43,7 +44,7 @@ bool endLevel = false;
     NSArray* start = [level objectForKey:@"start"];
     NSArray* door = [level objectForKey:@"door"];
     NSArray* key = [level objectForKey:@"key"];
-    NSArray* levelLayout = [level objectForKey:@"levelLayout"];
+    levelLayout = [level objectForKey:@"levelLayout"];
     
     gameSpace = [[NSMutableArray alloc] init];
     for (int gridWidth = 0; gridWidth < maxX; gridWidth++) {
@@ -75,7 +76,7 @@ bool endLevel = false;
 {
     ccColor4F red = ccc4f(1.0, 0.0, 0.0, 1.0); //parameters correspond to red, green, blue, and alpha (transparancy)
     ccColor4F blue = ccc4f(0.0, 0.0, 1.0, 1.0);
-    ccColor4F green = ccc4f(0.0, 1.0, 0.0, 1.0);
+    ccColor4F green = ccc4f(0.0, 0.8, 0.0, 1.0);
     ccColor4F yellow = ccc4f(1.0, 1.0, 0.0, 1.0);
     ccColor4F white = ccc4f(1.0, 1.0, 1.0, 1.0);
     ccColor4F brown = ccc4f(0.5, 0.25, 0.0, 1.0);
@@ -83,7 +84,7 @@ bool endLevel = false;
     NSArray* keyLoc = [level objectForKey:@"key"];
     NSArray* doorLoc = [level objectForKey:@"door"];
     NSArray* startLoc = [level objectForKey:@"start"];
-    NSArray* levelLayout = [level objectForKey:@"levelLayout"];
+    levelLayout = [level objectForKey:@"levelLayout"];
     
     for(int row = 0; row < HEIGHT_GAME; row += WIDTH_TILE)
     {
@@ -96,12 +97,18 @@ bool endLevel = false;
     
     for (int row = 0; row < NUM_COLUMNS; row += 1) {
         for (int col = 0; col < NUM_ROWS; col += 1) {
-            if (col == [keyLoc[0] integerValue] && row == [keyLoc[1] integerValue]) {
+            if (col == [keyLoc[1] integerValue] && row == [keyLoc[0] integerValue]) {
                 ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), yellow);
-            } else if (col == [doorLoc[0] integerValue] && row == [doorLoc[1] integerValue]) {
+            } else if (col == [doorLoc[1] integerValue] && row == [doorLoc[0] integerValue]) {
                 ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), brown);
-            } else {
+            } else if (col == [startLoc[1] integerValue] && row == [startLoc[0] integerValue]) {
+                ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), white);
+            } else if ([levelLayout[row][col] integerValue] == 2) {
                 ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), blue);
+            } else if ([levelLayout[row][col] integerValue] == 0) {
+                ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), red);
+            } else {
+                ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), green);
             }
         }
     }
@@ -158,7 +165,7 @@ bool endLevel = false;
 
 -(void) updateGrid
 {
-    //updates the grid array after there is a move
+    
 }
 
 @end
