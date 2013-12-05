@@ -16,6 +16,7 @@
     int checkpointY;
     int maxX;
     int maxY;
+    int numTilesLeft;
     bool hasCheckpoint;
     bool hasKey;
 }

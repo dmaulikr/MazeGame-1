@@ -50,15 +50,15 @@ bool endLevel = false;
         NSMutableArray* subArr = [[NSMutableArray alloc] init];
         for (int gridHeight = 0; gridHeight < maxY; gridHeight++) {
             
+            int numStepsAllowed = [[[levelLayout
+                                     objectAtIndex:gridWidth]
+                                     objectAtIndex:gridHeight]
+                                     integerValue];
             [subArr addObject:
              [[TileSpace alloc] initWithDoor:false initWithKey:false
                                 initWithCheckpoint:false initWithPlayer:false
-                                initWithNumStepsAllowed:
-                                    [[[levelLayout
-                                       objectAtIndex:gridWidth]
-                                       objectAtIndex:gridHeight]
-                                        integerValue]
-              ]];
+                                initWithNumStepsAllowed:numStepsAllowed]];
+            if (numStepsAllowed > 0) { numTilesLeft++; }
         }
         [gameSpace addObject: subArr];
     }
@@ -96,6 +96,7 @@ bool endLevel = false;
     if (input.gestureSwipeRecognizedThisFrame) {
         KKSwipeGestureDirection dir = input.gestureSwipeDirection;
         [playerTile decrementOne];
+        if ([playerTile getNumSteps] == 0) { numTilesLeft--; }
         switch (dir) {
             case KKSwipeGestureDirectionDown:
                 if (playerLocY > 0) { playerLocY--; }
@@ -120,7 +121,7 @@ bool endLevel = false;
                 hasCheckpoint = true;
             }
             if ([playerTile isDoor]) {
-                if (hasKey) { /* game over player won */ }
+                if (hasKey && numTilesLeft) { /* game over player won */ }
                 else { /* let them know they need to get the key */ }
             }
             [playerTile setPlayer:true];
