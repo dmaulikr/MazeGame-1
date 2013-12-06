@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C455CFD918514C6200E6F281 /* LevelSelectLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C455CFD818514C6200E6F281 /* LevelSelectLayer.m */; };
 		C462F6BB182AFA0100BDF67D /* level1.plist in Resources */ = {isa = PBXBuildFile; fileRef = C462F6BA182AFA0100BDF67D /* level1.plist */; };
 		C4933437182232CE00E764BB /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = C4933436182232CE00E764BB /* Grid.m */; };
 		C493343A18223A0100E764BB /* TileSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = C493343918223A0100E764BB /* TileSpace.m */; };
@@ -53,6 +54,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C455CFD718514C6200E6F281 /* LevelSelectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelectLayer.h; sourceTree = "<group>"; };
+		C455CFD818514C6200E6F281 /* LevelSelectLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSelectLayer.m; sourceTree = "<group>"; };
 		C462F6BA182AFA0100BDF67D /* level1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level1.plist; sourceTree = "<group>"; };
 		C4933435182232CE00E764BB /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
 		C4933436182232CE00E764BB /* Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grid.m; sourceTree = "<group>"; };
@@ -239,6 +242,8 @@
 				C4933436182232CE00E764BB /* Grid.m */,
 				F9AC2E97182B00F9005B3807 /* StartMenuLayer.h */,
 				F9AC2E98182B00F9005B3807 /* StartMenuLayer.m */,
+				C455CFD718514C6200E6F281 /* LevelSelectLayer.h */,
+				C455CFD818514C6200E6F281 /* LevelSelectLayer.m */,
 				DCC1A38D13A94F1A005BD75D /* AppDelegate.h */,
 				DCC1A38E13A94F1A005BD75D /* AppDelegate.m */,
 				DCC1A39413A94F1A005BD75D /* Resources */,
@@ -384,6 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C455CFD918514C6200E6F281 /* LevelSelectLayer.m in Sources */,
 				DCC1A3A913A94F1A005BD75D /* AppDelegate.m in Sources */,
 				C493343A18223A0100E764BB /* TileSpace.m in Sources */,
 				DCC1A3AD13A94F1A005BD75D /* main.m in Sources */,

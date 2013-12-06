@@ -9,5 +9,11 @@
 #import "CCLayer.h"
 
 @interface StartMenuLayer : CCLayer
+{
+}
+
++(id) scene;
+-(void) setUpMainMenu;
+-(void) selectLevel: (id) sender;
 
 @end
