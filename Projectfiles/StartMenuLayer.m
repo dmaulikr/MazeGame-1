@@ -26,18 +26,18 @@
 }
 
 -(void) setUpMainMenu {
-    CCLabelTTF* titleLabel = [CCLabelTTF labelWithString:@"MazeRunner" fontName:@"Courier" fontSize:32];
-    titleLabel.position = ccp(160, 260);
-    CCLabelTTF* playLabel = [CCLabelTTF labelWithString:@"Play Game" fontName:@"Courier" fontSize:20];
-    CCMenuItemLabel* play = [CCMenuItemLabel itemWithLabel:playLabel target:self selector:@selector(selectLevel:)];
+    CCLabelTTF* titleLabel = [CCLabelTTF labelWithString:@"MazeRunner" fontName:@"Verdana" fontSize:32];
+    titleLabel.position = ccp(160, 280);
+    CCLabelTTF* playLabel = [CCLabelTTF labelWithString:@"Play Game" fontName:@"Verdana" fontSize:20];
+    CCMenuItemLabel* play = [CCMenuItemLabel itemWithLabel:playLabel target:self selector:@selector(selectLevelMenu:)];
     
     CCMenu* mainMenu = [CCMenu menuWithItems: play, nil];
     [self addChild: titleLabel];
     [self addChild: mainMenu];
 }
 
--(void) selectLevel: (id) sender {
-    //[[CCDirector sharedDirector] replaceScene: [LevelSelectLayer levelSelect]];
+-(void) selectLevelMenu: (id) sender {
+    [[CCDirector sharedDirector] replaceScene: [LevelSelectLayer scene]];
 }
 
 @end

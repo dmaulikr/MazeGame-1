@@ -29,7 +29,6 @@ bool endLevel = false;
 -(id) init {
     if ((self = [super init])) {
         
-        
         [self schedule:@selector(nextFrame) interval:DELAY_IN_SECONDS];
         levelFile = @"level1.plist";
         runner = [CCSprite spriteWithFile:@"runner.png"];
@@ -43,9 +42,16 @@ bool endLevel = false;
         [self initLevel:levelFile];
         
         [self scheduleUpdate];
-        
     }
     return self;
+}
+
++(id) scene: (NSString*) level {
+    CCScene* gameScene = [CCScene node];
+    Grid* layer = [Grid node];
+    [layer initLevel:level];
+    [gameScene addChild: layer];
+    return gameScene;
 }
 
 -(void) initLevel: (NSString*) levelFile {
