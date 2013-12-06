@@ -9,6 +9,9 @@
 #import "Grid.h"
 #import "TileSpace.h"
 
+CCSprite *runner;
+CCSprite *key;
+
 @implementation Grid
 
 #define WIDTH_TILE 80
@@ -26,9 +29,19 @@ bool endLevel = false;
 -(id) init {
     if ((self = [super init])) {
         
+        
         [self schedule:@selector(nextFrame) interval:DELAY_IN_SECONDS];
         levelFile = @"level1.plist";
+        runner = [CCSprite spriteWithFile:@"runner.png"];
+        runner.position = ccp(20, 20);
+        runner.scale = 0.3;
+        key = [CCSprite spriteWithFile:@"key.jpeg"];
+        key.position = ccp(20, 20);
+        key.scale = 0.5;
+        [self addChild:runner];
+        [self addChild:key];
         [self initLevel:levelFile];
+        
         [self scheduleUpdate];
         
     }
@@ -37,6 +50,8 @@ bool endLevel = false;
 
 -(void) initLevel: (NSString*) levelFile {
     
+    key.visible = false;
+    hasKey = false;
     NSDictionary* level = [NSDictionary dictionaryWithContentsOfFile: levelFile];
     maxX = [[level objectForKey:@"width"] integerValue];
     maxY = [[level objectForKey:@"height"] integerValue];
@@ -77,7 +92,6 @@ bool endLevel = false;
     ccColor4F blue = ccc4f(0.0, 0.0, 1.0, 1.0);
     ccColor4F green = ccc4f(0.0, 0.8, 0.0, 1.0);
     ccColor4F yellow = ccc4f(1.0, 1.0, 0.0, 1.0);
-    ccColor4F white = ccc4f(1.0, 1.0, 1.0, 1.0);
     ccColor4F brown = ccc4f(0.5, 0.25, 0.0, 1.0);
     
     for(int row = 0; row < HEIGHT_GAME; row += WIDTH_TILE)
@@ -91,12 +105,17 @@ bool endLevel = false;
     
     for (int row = 0; row < NUM_COLUMNS; row += 1) {
         for (int col = 0; col < NUM_ROWS; col += 1) {
+            if ([gameSpace[row][col] hasPlayer] && [gameSpace[row][col] getNumSteps] > 0) {
+                runner.position = ccp(row + (WIDTH_TILE * row) + 40, col + (WIDTH_TILE * col) + 40);
+                key.position = ccp(row + (WIDTH_TILE * row) + 60, col + (WIDTH_TILE * col) + 30);
+                if (hasKey) {
+                    key.visible = true;
+                }
+            }
             if ([gameSpace[row][col] isKey] && [gameSpace[row][col] getNumSteps] > 0) {
                 ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), yellow);
             } else if ([gameSpace[row][col] isDoor] && [gameSpace[row][col] getNumSteps] > 0) {
                 ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), brown);
-            } else if ([gameSpace[row][col] hasPlayer] && [gameSpace[row][col] getNumSteps] > 0) {
-                ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), white);
             } else if ([gameSpace[row][col] getNumSteps] == 2) {
                 ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), blue);
             } else if ([gameSpace[row][col] getNumSteps] <= 0) {
@@ -118,7 +137,6 @@ bool endLevel = false;
     
     if (input.gestureSwipeRecognizedThisFrame) {
         KKSwipeGestureDirection dir = input.gestureSwipeDirection;
-        [playerTile decrementOne];
         if ([playerTile getNumSteps] == 0) { numTilesLeft--; }
         switch (dir) {
             case KKSwipeGestureDirectionDown:
@@ -127,6 +145,7 @@ bool endLevel = false;
                     nextTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
                     [playerTile setPlayer:false];
                     [nextTile setPlayer:true];
+                    [playerTile decrementOne];
                 }
                 break;
             case KKSwipeGestureDirectionLeft:
@@ -135,6 +154,7 @@ bool endLevel = false;
                     nextTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
                     [playerTile setPlayer:false];
                     [nextTile setPlayer:true];
+                    [playerTile decrementOne];
                 }
                 break;
             case KKSwipeGestureDirectionRight:
@@ -143,6 +163,7 @@ bool endLevel = false;
                     nextTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
                     [playerTile setPlayer:false];
                     [nextTile setPlayer:true];
+                    [playerTile decrementOne];
                 }
                 break;
             case KKSwipeGestureDirectionUp:
@@ -151,12 +172,15 @@ bool endLevel = false;
                     nextTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
                     [playerTile setPlayer:false];
                     [nextTile setPlayer:true];
+                    [playerTile decrementOne];
                 }
                 break;
         }
         playerTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
-        if ([playerTile getNumSteps] < 0) { /* game over the player fell */ }
-        else {
+        if ([playerTile getNumSteps] <= 0) {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Game Over!" message:@"You fell in lava :(" delegate:self cancelButtonTitle:@"Restart" otherButtonTitles:nil];
+            [alert show];
+        } else {
             if ([playerTile isKey]) { hasKey = true; }
             if ([playerTile isCheckpoint]) {
                 checkpointX = playerLocX;
@@ -164,13 +188,24 @@ bool endLevel = false;
                 hasCheckpoint = true;
             }
             if ([playerTile isDoor]) {
-                if (hasKey && numTilesLeft) { /* game over player won */ }
-                else { /* let them know they need to get the key */ }
+                if (hasKey && numTilesLeft) {
+                    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"You won!" message:@"Sweeeeet" delegate:self cancelButtonTitle:@"Go again?" otherButtonTitles:nil];
+                    [alert show];
+                } else {
+                    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Door Locked!" message:@"Dudebro you need the key :3" delegate:nil cancelButtonTitle:@"Hokay" otherButtonTitles:nil];
+                    [alert show];
+                }
             }
             [playerTile setPlayer:true];
         }
     }
 
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [self initLevel:levelFile];
+    }
 }
 
 -(void) nextFrame
