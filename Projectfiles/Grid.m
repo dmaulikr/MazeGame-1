@@ -29,7 +29,6 @@ bool endLevel = false;
 -(id) init {
     if ((self = [super init])) {
         
-        
         [self schedule:@selector(nextFrame) interval:DELAY_IN_SECONDS];
         [self scheduleUpdate];
     }
