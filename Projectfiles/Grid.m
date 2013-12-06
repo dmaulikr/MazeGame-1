@@ -35,7 +35,7 @@ bool endLevel = false;
         runner = [CCSprite spriteWithFile:@"runner.png"];
         runner.position = ccp(20, 20);
         runner.scale = 0.3;
-        key = [CCSprite spriteWithFile:@"key.jpeg"];
+        key = [CCSprite spriteWithFile:@"key.gif"];
         key.position = ccp(20, 20);
         key.scale = 0.5;
         [self addChild:runner];
@@ -107,7 +107,7 @@ bool endLevel = false;
         for (int col = 0; col < NUM_ROWS; col += 1) {
             if ([gameSpace[row][col] hasPlayer] && [gameSpace[row][col] getNumSteps] > 0) {
                 runner.position = ccp(row + (WIDTH_TILE * row) + 40, col + (WIDTH_TILE * col) + 40);
-                key.position = ccp(row + (WIDTH_TILE * row) + 60, col + (WIDTH_TILE * col) + 30);
+                key.position = ccp(row + (WIDTH_TILE * row) + 70, col + (WIDTH_TILE * col) + 35);
                 if (hasKey) {
                     key.visible = true;
                 }
