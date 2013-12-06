@@ -14,6 +14,6 @@
 
 +(id) scene;
 -(void) setUpMainMenu;
--(void) selectLevel: (id) sender;
+-(void) selectLevelMenu: (id) sender;
 
 @end

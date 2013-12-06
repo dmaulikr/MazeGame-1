@@ -9,5 +9,11 @@
 #import "CCLayer.h"
 
 @interface LevelSelectLayer : CCLayer
+{
+}
+
++(id) scene;
+-(void) setUpLevelSelect;
+-(void) selectLevel: (id) sender;
 
 @end

@@ -22,6 +22,7 @@
     NSString* levelFile;
 }
 
++(id) scene: (NSString*) level;
 -(void) initLevel: (NSString*) levelFile;
 -(void) draw;
 -(void) update: (ccTime) delta;

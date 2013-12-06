@@ -27,12 +27,17 @@ bool endLevel = false;
     if ((self = [super init])) {
         
         [self schedule:@selector(nextFrame) interval:DELAY_IN_SECONDS];
-        levelFile = @"level1.plist";
-        [self initLevel:levelFile];
         [self scheduleUpdate];
-        
     }
     return self;
+}
+
++(id) scene: (NSString*) level {
+    CCScene* gameScene = [CCScene node];
+    Grid* layer = [Grid node];
+    [layer initLevel:level];
+    [gameScene addChild: layer];
+    return gameScene;
 }
 
 -(void) initLevel: (NSString*) levelFile {
