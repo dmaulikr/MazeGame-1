@@ -8,7 +8,7 @@
 
 #import "CCLayer.h"
 
-@interface Grid : CCLayer {
+@interface Grid : CCLayer <UIAlertViewDelegate> {
     NSMutableArray* gameSpace;
     int playerLocX;
     int playerLocY;
