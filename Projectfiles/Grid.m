@@ -11,7 +11,6 @@
 
 @implementation Grid
 
-NSMutableArray* levelLayout;
 #define WIDTH_TILE 80
 #define HEIGHT_TILE 80
 #define WIDTH_WINDOW 320
@@ -44,7 +43,7 @@ bool endLevel = false;
     NSArray* start = [level objectForKey:@"start"];
     NSArray* door = [level objectForKey:@"door"];
     NSArray* key = [level objectForKey:@"key"];
-    levelLayout = [level objectForKey:@"levelLayout"];
+    NSArray* levelLayout = [level objectForKey:@"levelLayout"];
     
     gameSpace = [[NSMutableArray alloc] init];
     for (int gridWidth = 0; gridWidth < maxX; gridWidth++) {
@@ -80,11 +79,6 @@ bool endLevel = false;
     ccColor4F yellow = ccc4f(1.0, 1.0, 0.0, 1.0);
     ccColor4F white = ccc4f(1.0, 1.0, 1.0, 1.0);
     ccColor4F brown = ccc4f(0.5, 0.25, 0.0, 1.0);
-    NSDictionary* level = [NSDictionary dictionaryWithContentsOfFile: levelFile];
-    NSArray* keyLoc = [level objectForKey:@"key"];
-    NSArray* doorLoc = [level objectForKey:@"door"];
-    NSArray* startLoc = [level objectForKey:@"start"];
-    levelLayout = [level objectForKey:@"levelLayout"];
     
     for(int row = 0; row < HEIGHT_GAME; row += WIDTH_TILE)
     {
@@ -97,17 +91,17 @@ bool endLevel = false;
     
     for (int row = 0; row < NUM_COLUMNS; row += 1) {
         for (int col = 0; col < NUM_ROWS; col += 1) {
-            if (col == [keyLoc[1] integerValue] && row == [keyLoc[0] integerValue]) {
+            if ([gameSpace[row][col] isKey] && [gameSpace[row][col] getNumSteps] > 0) {
                 ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), yellow);
-            } else if (col == [doorLoc[1] integerValue] && row == [doorLoc[0] integerValue]) {
+            } else if ([gameSpace[row][col] isDoor] && [gameSpace[row][col] getNumSteps] > 0) {
                 ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), brown);
-            } else if (col == [startLoc[1] integerValue] && row == [startLoc[0] integerValue]) {
+            } else if ([gameSpace[row][col] hasPlayer] && [gameSpace[row][col] getNumSteps] > 0) {
                 ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), white);
-            } else if ([levelLayout[row][col] integerValue] == 2) {
+            } else if ([gameSpace[row][col] getNumSteps] == 2) {
                 ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), blue);
-            } else if ([levelLayout[row][col] integerValue] == 0) {
+            } else if ([gameSpace[row][col] getNumSteps] <= 0) {
                 ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), red);
-            } else {
+            } else if ([gameSpace[row][col] getNumSteps] == 1) {
                 ccDrawSolidRect(ccp(row + (WIDTH_TILE * row), col + (WIDTH_TILE * col)), ccp(row + (WIDTH_TILE * row) + WIDTH_TILE, col + (WIDTH_TILE * col) + WIDTH_TILE), green);
             }
         }
@@ -120,6 +114,7 @@ bool endLevel = false;
     input.gestureSwipeEnabled = YES;
     
     TileSpace* playerTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
+    TileSpace* nextTile;
     
     if (input.gestureSwipeRecognizedThisFrame) {
         KKSwipeGestureDirection dir = input.gestureSwipeDirection;
@@ -127,16 +122,36 @@ bool endLevel = false;
         if ([playerTile getNumSteps] == 0) { numTilesLeft--; }
         switch (dir) {
             case KKSwipeGestureDirectionDown:
-                if (playerLocY > 0) { playerLocY--; }
+                if (playerLocY > 0) {
+                    playerLocY--;
+                    nextTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
+                    [playerTile setPlayer:false];
+                    [nextTile setPlayer:true];
+                }
                 break;
             case KKSwipeGestureDirectionLeft:
-                if (playerLocX > 0) { playerLocX--; }
+                if (playerLocX > 0) {
+                    playerLocX--;
+                    nextTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
+                    [playerTile setPlayer:false];
+                    [nextTile setPlayer:true];
+                }
                 break;
             case KKSwipeGestureDirectionRight:
-                if (playerLocX < maxX - 1) { playerLocX++; }
+                if (playerLocX < maxX - 1) {
+                    playerLocX++;
+                    nextTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
+                    [playerTile setPlayer:false];
+                    [nextTile setPlayer:true];
+                }
                 break;
             case KKSwipeGestureDirectionUp:
-                if (playerLocY < maxY - 1) { playerLocY++; }
+                if (playerLocY < maxY - 1) {
+                    playerLocY++;
+                    nextTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
+                    [playerTile setPlayer:false];
+                    [nextTile setPlayer:true];
+                }
                 break;
         }
         playerTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
