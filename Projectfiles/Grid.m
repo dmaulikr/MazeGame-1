@@ -38,8 +38,17 @@ bool endLevel = false;
         key = [CCSprite spriteWithFile:@"key.gif"];
         key.position = ccp(20, 20);
         key.scale = 0.75;
+        CCMenuItemImage* back = [CCMenuItemImage itemWithNormalImage:@"back.png" selectedImage:@"back.png" target:self selector:@selector(navBarSelection:)];
+        back.tag = 1;
+        CCMenuItemImage* retry = [CCMenuItemImage itemWithNormalImage:@"retry.png" selectedImage:@"retry.png" target:self selector:@selector(navBarSelection:)];
+        retry.tag = 2;
+        CCMenu* navBar = [CCMenu menuWithItems:back, retry, nil];
+        [navBar alignItemsHorizontally];
+        navBar.scale = 2.3;
+        navBar.position = ccp(265, 905);
         [self addChild:runner];
         [self addChild:key];
+        [self addChild:navBar];
         [self initLevel:levelFile];
         
         [self scheduleUpdate];
@@ -54,6 +63,18 @@ bool endLevel = false;
     layer->levelFile = level;
     [gameScene addChild: layer];
     return gameScene;
+}
+
+-(void) navBarSelection: (CCMenuItem*) navBarItem {
+    int navBarParam = navBarItem.tag;
+    switch (navBarParam) {
+        case 1:
+            [[CCDirector sharedDirector] replaceScene:[LevelSelectLayer scene]];
+            break;
+        case 2:
+            [self initLevel:levelFile];
+            break;
+    }
 }
 
 -(void) initLevel: (NSString*) levelFile {
