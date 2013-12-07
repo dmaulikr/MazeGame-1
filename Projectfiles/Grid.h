@@ -22,6 +22,8 @@
     NSString* levelFile;
 }
 
+@property (strong, nonatomic) CCLabelTTF *stopWatchLabel;
+
 +(id) scene: (NSString*) level;
 -(void) initLevel: (NSString*) levelFile;
 -(void) draw;

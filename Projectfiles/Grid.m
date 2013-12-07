@@ -14,7 +14,19 @@ CCSprite *runner;
 CCSprite *key;
 NSString *levelFile;
 
+int currMinute;
+int currSecond;
+int currHour;
+int mins;
+bool running;
+NSTimeInterval startTime;
+NSTimeInterval stoppedTime;
+NSDate *startDate;
+NSTimeInterval secondsAlreadyRun;
+
 @implementation Grid
+
+@synthesize stopWatchLabel;
 
 #define HEIGHT_TILE 80
 #define WIDTH_WINDOW 320
@@ -56,8 +68,31 @@ bool endLevel = false;
     return gameScene;
 }
 
+//- (void)updateTime {
+//    
+//    NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
+//    NSTimeInterval elapsed = currentTime - startTime;
+//    
+//    
+//    int mins = (int) (elapsed / 60.0);
+//    elapsed -= mins * 60;
+//    int secs = (int) (elapsed);
+//    elapsed -= secs;
+//    int fraction = elapsed * 10.0;
+//    
+//    [self removeChild:stopWatchLabel];
+//    [stopWatchLabel setString:[NSString
+//                            stringWithFormat:@"%u:%u.%u", mins, secs, fraction]];
+//    [self addChild:stopWatchLabel];
+//    [self performSelector:@selector(updateTime) withObject:self afterDelay:0.1];
+//}
+
 -(void) initLevel: (NSString*) levelFile {
     
+//    stopWatchLabel =  [[CCLabelTTF alloc] init];
+//    stopWatchLabel.fontSize = 20;
+//    stopWatchLabel.position = ccp(200, 200);
+    running = false;
     key.visible = false;
     hasKey = false;
     numTilesLeft = 0;
@@ -92,6 +127,10 @@ bool endLevel = false;
     playerLocX = [[start objectAtIndex:0] integerValue];
     playerLocY = [[start objectAtIndex:1] integerValue];
     [[[gameSpace objectAtIndex:[[door objectAtIndex:0] integerValue]] objectAtIndex:[[door objectAtIndex:1] integerValue]] setDoor:true];
+    
+    startDate = [[NSDate alloc] init];
+    startTime = [NSDate timeIntervalSinceReferenceDate];
+//    [self updateTime];
 
 }
 
@@ -197,7 +236,7 @@ bool endLevel = false;
         if ([playerTile getNumSteps] == 0) { numTilesLeft--; }
         playerTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
         if ([playerTile getNumSteps] <= 0) {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Game Over!" message:@"You fell in lava :(" delegate:self cancelButtonTitle:@"Restart" otherButtonTitles:nil];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Game Over!" message:@"You fell to your doom :(" delegate:self cancelButtonTitle:@"Restart" otherButtonTitles:nil];
             [alert show];
         } else {
             if ([playerTile isKey]) { hasKey = true; }
@@ -212,10 +251,10 @@ bool endLevel = false;
                     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:levelFile];
                     [alert show];
                 } else if (hasKey && numTilesLeft > 1) {
-                    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Door Locked!" message:@"Dudebro you need to break all the tiles" delegate:self cancelButtonTitle:@"Hokay" otherButtonTitles:nil];
+                    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Door Locked!" message:@"You need to break all the tiles" delegate:self cancelButtonTitle:@"Hokay" otherButtonTitles:nil];
                     [alert show];
                 } else {
-                    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Door Locked!" message:@"Dudebro you need the key :3" delegate:self cancelButtonTitle:@"Hokay" otherButtonTitles:nil];
+                    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Door Locked!" message:@"You need the key!" delegate:self cancelButtonTitle:@"Hokay" otherButtonTitles:nil];
                     [alert show];
                 }
             }
