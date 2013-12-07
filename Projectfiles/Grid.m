@@ -31,13 +31,13 @@ bool endLevel = false;
     if ((self = [super init])) {
         
         [self schedule:@selector(nextFrame) interval:DELAY_IN_SECONDS];
-        runner = [CCSprite spriteWithFile:@"runner.png"];
-        runner.position = ccp(20, 20);
-        runner.scale = 0.3;
         levelFile = @"level1.plist";
+        runner = [CCSprite spriteWithFile:@"runner.png"];
+        runner.position = ccp(8, 8);
+        runner.scale = 0.4;
         key = [CCSprite spriteWithFile:@"key.gif"];
         key.position = ccp(20, 20);
-        key.scale = 0.5;
+        key.scale = 0.75;
         [self addChild:runner];
         [self addChild:key];
         [self initLevel:levelFile];
@@ -60,6 +60,7 @@ bool endLevel = false;
     
     key.visible = false;
     hasKey = false;
+    numTilesLeft = 0;
     NSDictionary* level = [NSDictionary dictionaryWithContentsOfFile: levelFile];
     maxX = [[level objectForKey:@"width"] integerValue];
     maxY = [[level objectForKey:@"height"] integerValue];
@@ -117,8 +118,8 @@ bool endLevel = false;
     for (int row = 0; row < maxX; row += 1) {
         for (int col = 0; col < maxY; col += 1) {
             if ([gameSpace[row][col] hasPlayer] && [gameSpace[row][col] getNumSteps] > 0) {
-                runner.position = ccp(row + (widthBlock * row) + 40, col + (heightBlock * col) + 40);
-                key.position = ccp(row + (widthBlock * row) + 70, col + (heightBlock * col) + 35);
+                runner.position = ccp(row + (widthBlock * row) + (widthBlock / 2), col + (heightBlock * col) + (heightBlock / 2));
+                key.position = ccp(row + (widthBlock * row) + (widthBlock - (widthBlock / 6)), col + (heightBlock * col) + (heightBlock / 2));
    
                 if (hasKey) {
                     key.visible = true;
@@ -151,7 +152,6 @@ bool endLevel = false;
     
     if (input.gestureSwipeRecognizedThisFrame) {
         KKSwipeGestureDirection dir = input.gestureSwipeDirection;
-        if ([playerTile getNumSteps] == 0) { numTilesLeft--; }
         switch (dir) {
             case KKSwipeGestureDirectionDown:
                 if (playerLocY > 0) {
@@ -190,6 +190,7 @@ bool endLevel = false;
                 }
                 break;
         }
+        if ([playerTile getNumSteps] == 0) { NSLog(@"%d", numTilesLeft); numTilesLeft--; }
         playerTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
         if ([playerTile getNumSteps] <= 0) {
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Game Over!" message:@"You fell in lava :(" delegate:self cancelButtonTitle:@"Restart" otherButtonTitles:nil];
