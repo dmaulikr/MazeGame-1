@@ -25,6 +25,7 @@
 @property (strong, nonatomic) CCLabelTTF *stopWatchLabel;
 
 +(id) scene: (NSString*) level;
+-(void) navBarSelection: (CCMenuItem*) navBarItem;
 -(void) initLevel: (NSString*) levelFile;
 -(void) draw;
 -(void) update: (ccTime) delta;

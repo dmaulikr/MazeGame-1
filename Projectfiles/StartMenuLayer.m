@@ -27,7 +27,7 @@
 
 -(void) setUpMainMenu {
     CCLabelTTF* titleLabel = [CCLabelTTF labelWithString:@"MazeRunner" fontName:@"Verdana" fontSize:32];
-    titleLabel.position = ccp(160, 320);
+    titleLabel.position = ccp(160, 340);
     CCLabelTTF* playLabel = [CCLabelTTF labelWithString:@"Play Game" fontName:@"Verdana" fontSize:20];
     CCMenuItemLabel* play = [CCMenuItemLabel itemWithLabel:playLabel target:self selector:@selector(selectLevelMenu:)];
     
