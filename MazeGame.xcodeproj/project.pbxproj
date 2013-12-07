@@ -51,6 +51,15 @@
 		DCC1A3B013A94F1A005BD75D /* config.lua in Resources */ = {isa = PBXBuildFile; fileRef = DCC1A39513A94F1A005BD75D /* config.lua */; };
 		DCF95CD213A97EC500AE3B80 /* libcocos2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF95CC913A97EC500AE3B80 /* libcocos2d-mac.a */; };
 		DCF95CD413A97EC500AE3B80 /* libkobold2d-mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCF95CCB13A97EC500AE3B80 /* libkobold2d-mac.a */; };
+		F926B1EF1852C6F4007ACA06 /* dirt1.png in Resources */ = {isa = PBXBuildFile; fileRef = F926B1EB1852C6F4007ACA06 /* dirt1.png */; };
+		F926B1F01852C6F4007ACA06 /* dirt2.png in Resources */ = {isa = PBXBuildFile; fileRef = F926B1EC1852C6F4007ACA06 /* dirt2.png */; };
+		F926B1F11852C6F4007ACA06 /* stone1.png in Resources */ = {isa = PBXBuildFile; fileRef = F926B1ED1852C6F4007ACA06 /* stone1.png */; };
+		F926B1F21852C6F4007ACA06 /* stone2.png in Resources */ = {isa = PBXBuildFile; fileRef = F926B1EE1852C6F4007ACA06 /* stone2.png */; };
+		F926B1F41852D005007ACA06 /* lava1.png in Resources */ = {isa = PBXBuildFile; fileRef = F926B1F31852D005007ACA06 /* lava1.png */; };
+		F926B1F81852D8C7007ACA06 /* door.png in Resources */ = {isa = PBXBuildFile; fileRef = F926B1F71852D8C6007ACA06 /* door.png */; };
+		F926B1FA1852DA35007ACA06 /* keyindirt.png in Resources */ = {isa = PBXBuildFile; fileRef = F926B1F91852DA35007ACA06 /* keyindirt.png */; };
+		F926B1FE1852DBCD007ACA06 /* keyindirt.gif in Resources */ = {isa = PBXBuildFile; fileRef = F926B1FD1852DBCD007ACA06 /* keyindirt.gif */; };
+		F926B2001852DCD5007ACA06 /* sturdystone.png in Resources */ = {isa = PBXBuildFile; fileRef = F926B1FF1852DCD5007ACA06 /* sturdystone.png */; };
 		F93F48151851D10B0031A681 /* key.gif in Resources */ = {isa = PBXBuildFile; fileRef = F93F48141851D10B0031A681 /* key.gif */; };
 		F98F57691851BDEF00D70AA2 /* runner.png in Resources */ = {isa = PBXBuildFile; fileRef = F98F57681851BDEF00D70AA2 /* runner.png */; };
 		F9AC2E99182B00F9005B3807 /* StartMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F9AC2E98182B00F9005B3807 /* StartMenuLayer.m */; };
@@ -114,6 +123,15 @@
 		DCF95CCB13A97EC500AE3B80 /* libkobold2d-mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libkobold2d-mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCFA90EF13B4F6F7009DD35A /* BuildSettings-Debug-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-Debug-iOS.xcconfig"; sourceTree = "<group>"; };
 		DCFA90F013B4F811009DD35A /* BuildSettings-Release-iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "BuildSettings-Release-iOS.xcconfig"; sourceTree = "<group>"; };
+		F926B1EB1852C6F4007ACA06 /* dirt1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dirt1.png; sourceTree = "<group>"; };
+		F926B1EC1852C6F4007ACA06 /* dirt2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dirt2.png; sourceTree = "<group>"; };
+		F926B1ED1852C6F4007ACA06 /* stone1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stone1.png; sourceTree = "<group>"; };
+		F926B1EE1852C6F4007ACA06 /* stone2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stone2.png; sourceTree = "<group>"; };
+		F926B1F31852D005007ACA06 /* lava1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lava1.png; sourceTree = "<group>"; };
+		F926B1F71852D8C6007ACA06 /* door.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = door.png; sourceTree = "<group>"; };
+		F926B1F91852DA35007ACA06 /* keyindirt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyindirt.png; sourceTree = "<group>"; };
+		F926B1FD1852DBCD007ACA06 /* keyindirt.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = keyindirt.gif; sourceTree = "<group>"; };
+		F926B1FF1852DCD5007ACA06 /* sturdystone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sturdystone.png; sourceTree = "<group>"; };
 		F93F48141851D10B0031A681 /* key.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = key.gif; sourceTree = "<group>"; };
 		F98F57681851BDEF00D70AA2 /* runner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = runner.png; sourceTree = "<group>"; };
 		F9AC2E97182B00F9005B3807 /* StartMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartMenuLayer.h; sourceTree = "<group>"; };
@@ -261,6 +279,7 @@
 		DCC1A39413A94F1A005BD75D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F926B1EA1852C6F4007ACA06 /* Textures */,
 				F93F48141851D10B0031A681 /* key.gif */,
 				F98F57681851BDEF00D70AA2 /* runner.png */,
 				DCC1A39513A94F1A005BD75D /* config.lua */,
@@ -291,6 +310,22 @@
 				DC9C33E813B5024400931BF2 /* BuildSettings-Mac.xcconfig */,
 			);
 			path = BuildSettings;
+			sourceTree = "<group>";
+		};
+		F926B1EA1852C6F4007ACA06 /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				F926B1FF1852DCD5007ACA06 /* sturdystone.png */,
+				F926B1FD1852DBCD007ACA06 /* keyindirt.gif */,
+				F926B1F91852DA35007ACA06 /* keyindirt.png */,
+				F926B1F71852D8C6007ACA06 /* door.png */,
+				F926B1F31852D005007ACA06 /* lava1.png */,
+				F926B1EB1852C6F4007ACA06 /* dirt1.png */,
+				F926B1EC1852C6F4007ACA06 /* dirt2.png */,
+				F926B1ED1852C6F4007ACA06 /* stone1.png */,
+				F926B1EE1852C6F4007ACA06 /* stone2.png */,
+			);
+			path = Textures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,19 +400,28 @@
 				DCC1A0FA13A94ED5005BD75D /* Default.png in Resources */,
 				DCC1A0FE13A94ED5005BD75D /* Icon-72.png in Resources */,
 				DCC1A10013A94ED5005BD75D /* Icon-Small-50.png in Resources */,
+				F926B1FA1852DA35007ACA06 /* keyindirt.png in Resources */,
+				F926B1F11852C6F4007ACA06 /* stone1.png in Resources */,
 				DCC1A10213A94ED5005BD75D /* Icon-Small.png in Resources */,
 				DCC1A10413A94ED5005BD75D /* Icon-Small@2x.png in Resources */,
 				DCC1A10613A94ED5005BD75D /* Icon.png in Resources */,
 				DCC1A10813A94ED5005BD75D /* Icon@2x.png in Resources */,
+				F926B1F21852C6F4007ACA06 /* stone2.png in Resources */,
+				F926B1F01852C6F4007ACA06 /* dirt2.png in Resources */,
 				DCC1A3AF13A94F1A005BD75D /* config.lua in Resources */,
 				C462F6BB182AFA0100BDF67D /* level1.plist in Resources */,
 				DC21B88B1511078F00FD4891 /* fps_images-hd.png in Resources */,
+				F926B2001852DCD5007ACA06 /* sturdystone.png in Resources */,
 				DC21B88C1511078F00FD4891 /* fps_images-ipadhd.png in Resources */,
 				C4856BE21851D71B00A7276E /* level2.plist in Resources */,
+				F926B1F81852D8C7007ACA06 /* door.png in Resources */,
+				F926B1F41852D005007ACA06 /* lava1.png in Resources */,
 				DC21B88D1511078F00FD4891 /* fps_images.png in Resources */,
 				DC27219F160CADFF00D88944 /* Default-568h@2x.png in Resources */,
+				F926B1FE1852DBCD007ACA06 /* keyindirt.gif in Resources */,
 				DC2721A8160CAFA600D88944 /* iTunesArtwork in Resources */,
 				F98F57691851BDEF00D70AA2 /* runner.png in Resources */,
+				F926B1EF1852C6F4007ACA06 /* dirt1.png in Resources */,
 				F93F48151851D10B0031A681 /* key.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

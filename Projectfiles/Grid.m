@@ -19,7 +19,7 @@ NSString *levelFile;
 #define HEIGHT_TILE 80
 #define WIDTH_WINDOW 320
 #define HEIGHT_WINDOW 480
-#define DELAY_IN_SECONDS 0.15
+#define DELAY_IN_SECONDS 0.4
 #define Y_OFF_SET 0
 #define HEIGHT_GAME HEIGHT_WINDOW
 #define WIDTH_GAME WIDTH_WINDOW
@@ -97,23 +97,8 @@ bool endLevel = false;
 
 -(void) draw
 {
-    ccColor4F red = ccc4f(1.0, 0.0, 0.0, 1.0); //parameters correspond to red, green, blue, and alpha (transparancy)
-    ccColor4F blue = ccc4f(0.0, 0.0, 1.0, 1.0);
-    ccColor4F green = ccc4f(0.0, 0.8, 0.0, 1.0);
-    ccColor4F yellow = ccc4f(1.0, 1.0, 0.0, 1.0);
-    ccColor4F brown = ccc4f(0.5, 0.25, 0.0, 1.0);
-    ccColor4F purple = ccc4f(1.0, 0.0, 1.0, 1.0);
     int widthBlock = WIDTH_WINDOW / maxX;
     int heightBlock = HEIGHT_WINDOW / maxY;
-    
-    for(int row = 0; row < HEIGHT_WINDOW; row += widthBlock)
-    {
-        ccDrawLine(ccp(0, row), ccp(WIDTH_WINDOW, row));
-    }
-    
-    for (int col = 0; col <= WIDTH_GAME; col += widthBlock) {
-        ccDrawLine(ccp(col, 0 + Y_OFF_SET), ccp(col, HEIGHT_GAME + Y_OFF_SET));
-    }
     
     for (int row = 0; row < maxX; row += 1) {
         for (int col = 0; col < maxY; col += 1) {
@@ -126,17 +111,36 @@ bool endLevel = false;
                 }
             }
             if ([gameSpace[row][col] isKey] && [gameSpace[row][col] getNumSteps] > 0) {
-                ccDrawSolidRect(ccp(row + (widthBlock * row), col + (heightBlock * col)), ccp(row + (widthBlock * row) + widthBlock, col + (heightBlock * col) + heightBlock), yellow);
+                UIImage* image = [UIImage imageNamed:@"keyindirt.gif"];
+                CGImageRef imageRef = image.CGImage;
+                CCTexture2D *block = [[CCTexture2D alloc] init];
+                [block initWithCGImage:imageRef resolutionType:kCCResolutioniPhoneRetinaDisplay];
+                [block drawInRect:CGRectMake(row + (widthBlock * row), col + (heightBlock * col), widthBlock, heightBlock)];
             } else if ([gameSpace[row][col] isDoor] && [gameSpace[row][col] getNumSteps] > 0) {
-                ccDrawSolidRect(ccp(row + (widthBlock * row), col + (heightBlock * col)), ccp(row + (widthBlock * row) + widthBlock, col + (heightBlock * col) + heightBlock), brown);
+                UIImage* image = [UIImage imageNamed:@"door.png"];
+                CGImageRef imageRef = image.CGImage;
+                CCTexture2D *block = [[CCTexture2D alloc] init];
+                [block initWithCGImage:imageRef resolutionType:kCCResolutioniPhoneRetinaDisplay];
+                [block drawInRect:CGRectMake(row + (widthBlock * row), col + (heightBlock * col), widthBlock, heightBlock)];
             } else if ([gameSpace[row][col] getNumSteps] == 2) {
-                ccDrawSolidRect(ccp(row + (widthBlock * row), col + (heightBlock * col)), ccp(row + (widthBlock * row) + widthBlock, col + (heightBlock * col) + heightBlock), blue);
+                UIImage* image = [UIImage imageNamed:@"stone2.png"];
+                CGImageRef imageRef = image.CGImage;
+                CCTexture2D *block = [[CCTexture2D alloc] init];
+                [block initWithCGImage:imageRef resolutionType:kCCResolutioniPhoneRetinaDisplay];
+                [block drawInRect:CGRectMake(row + (widthBlock * row), col + (heightBlock * col), widthBlock, heightBlock)];
             } else if ([gameSpace[row][col] getNumSteps] == 3) {
-                ccDrawSolidRect(ccp(row + (widthBlock * row), col + (heightBlock * col)), ccp(row + (widthBlock * row) + widthBlock, col + (heightBlock * col) + heightBlock), purple);
+                UIImage* image = [UIImage imageNamed:@"sturdystone.png"];
+                CGImageRef imageRef = image.CGImage;
+                CCTexture2D *block = [[CCTexture2D alloc] init];
+                [block initWithCGImage:imageRef resolutionType:kCCResolutioniPhoneRetinaDisplay];
+                [block drawInRect:CGRectMake(row + (widthBlock * row), col + (heightBlock * col), widthBlock, heightBlock)];
             } else if ([gameSpace[row][col] getNumSteps] <= 0) {
-                ccDrawSolidRect(ccp(row + (widthBlock * row), col + (heightBlock * col)), ccp(row + (widthBlock * row) + widthBlock, col + (heightBlock * col) + heightBlock), red);
             } else if ([gameSpace[row][col] getNumSteps] == 1) {
-                ccDrawSolidRect(ccp(row + (widthBlock * row), col + (heightBlock * col)), ccp(row + (widthBlock * row) + widthBlock, col + (heightBlock * col) + heightBlock), green);
+                UIImage* image = [UIImage imageNamed:@"dirt2.png"];
+                CGImageRef imageRef = image.CGImage;
+                CCTexture2D *block = [[CCTexture2D alloc] init];
+                [block initWithCGImage:imageRef resolutionType:kCCResolutioniPhoneRetinaDisplay];
+                [block drawInRect:CGRectMake(row + (widthBlock * row), col + (heightBlock * col), widthBlock, heightBlock)];
             }
         }
     }
@@ -190,7 +194,7 @@ bool endLevel = false;
                 }
                 break;
         }
-        if ([playerTile getNumSteps] == 0) { NSLog(@"%d", numTilesLeft); numTilesLeft--; }
+        if ([playerTile getNumSteps] == 0) { numTilesLeft--; }
         playerTile = [[gameSpace objectAtIndex:playerLocX] objectAtIndex:playerLocY];
         if ([playerTile getNumSteps] <= 0) {
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Game Over!" message:@"You fell in lava :(" delegate:self cancelButtonTitle:@"Restart" otherButtonTitles:nil];
