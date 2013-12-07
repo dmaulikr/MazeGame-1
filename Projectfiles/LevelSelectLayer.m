@@ -26,23 +26,25 @@
 }
 
 -(void) setUpLevelSelect {
-    NSDictionary* levelsCompleted = [NSDictionary dictionaryWithContentsOfFile:@"levelsCompleted.plist"];
-    
+
     CCLabelTTF* selectALevelLabel = [CCLabelTTF labelWithString:@"Select A Level" fontName:@"Verdana" fontSize:32];
     selectALevelLabel.position = ccp(160, 380);
     CCLabelTTF* level1 = [CCLabelTTF labelWithString:@"Level 1" fontName:@"Verdana" fontSize:20];
     CCMenuItemLabel* level1label = [CCMenuItemLabel itemWithLabel:level1 target:self selector:@selector(selectLevel:)];
     level1label.tag = 1;
-    if ([levelsCompleted objectForKey:@"level1"]) { }
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"level1.plist"] boolValue]) { level1label.color = ccc3(0, 153, 0); }
     CCLabelTTF* level2 = [CCLabelTTF labelWithString:@"Level 2" fontName:@"Verdana" fontSize:20];
     CCMenuItemLabel* level2label = [CCMenuItemLabel itemWithLabel:level2 target:self selector:@selector(selectLevel:)];
     level2label.tag = 2;
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"level2.plist"] boolValue]) { level2label.color = ccc3(0, 153, 0); }
     CCLabelTTF* level3 = [CCLabelTTF labelWithString:@"Level 3" fontName:@"Verdana" fontSize:20];
     CCMenuItemLabel* level3label = [CCMenuItemLabel itemWithLabel:level3 target:self selector:@selector(selectLevel:)];
     level3label.tag = 3;
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"level3.plist"] boolValue]) { level3label.color = ccc3(0, 153, 0); }
     CCLabelTTF* level4 = [CCLabelTTF labelWithString:@"Level 4" fontName:@"Verdana" fontSize:20];
     CCMenuItemLabel* level4label = [CCMenuItemLabel itemWithLabel:level4 target:self selector:@selector(selectLevel:)];
     level4label.tag = 4;
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"level4.plist"] boolValue]) { level4label.color = ccc3(0, 153, 0); }
 
     CCMenu* levels = [CCMenu menuWithItems: level1label, level2label, level3label, level4label, nil];
     [levels alignItemsVertically];

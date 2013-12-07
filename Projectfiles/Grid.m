@@ -199,6 +199,7 @@ bool endLevel = false;
             if ([playerTile isDoor]) {
                 if (hasKey && numTilesLeft) {
                     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"You won!" message:@"Sweeeeet" delegate:self cancelButtonTitle:@"Replay" otherButtonTitles:@"Back to level select", nil];
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:levelFile];
                     [alert show];
                 } else {
                     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Door Locked!" message:@"Dudebro you need the key :3" delegate:self cancelButtonTitle:@"Hokay" otherButtonTitles:nil];
