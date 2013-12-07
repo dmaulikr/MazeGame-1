@@ -9,9 +9,11 @@
 /* Begin PBXBuildFile section */
 		C42E377D1852E40800D71592 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = C42E377B1852E40800D71592 /* back.png */; };
 		C42E377E1852E40800D71592 /* retry.png in Resources */ = {isa = PBXBuildFile; fileRef = C42E377C1852E40800D71592 /* retry.png */; };
+		C42E37801852F62400D71592 /* level3.plist in Resources */ = {isa = PBXBuildFile; fileRef = C42E377F1852F62400D71592 /* level3.plist */; };
+		C42E37821852F79900D71592 /* level2.plist in Resources */ = {isa = PBXBuildFile; fileRef = C42E37811852F79900D71592 /* level2.plist */; };
 		C455CFD918514C6200E6F281 /* LevelSelectLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C455CFD818514C6200E6F281 /* LevelSelectLayer.m */; };
 		C462F6BB182AFA0100BDF67D /* level1.plist in Resources */ = {isa = PBXBuildFile; fileRef = C462F6BA182AFA0100BDF67D /* level1.plist */; };
-		C4856BE21851D71B00A7276E /* level2.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4856BE11851D71B00A7276E /* level2.plist */; };
+		C4856BE21851D71B00A7276E /* level4.plist in Resources */ = {isa = PBXBuildFile; fileRef = C4856BE11851D71B00A7276E /* level4.plist */; };
 		C4933437182232CE00E764BB /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = C4933436182232CE00E764BB /* Grid.m */; };
 		C493343A18223A0100E764BB /* TileSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = C493343918223A0100E764BB /* TileSpace.m */; };
 		DC21B88B1511078F00FD4891 /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DC21B8881511078F00FD4891 /* fps_images-hd.png */; };
@@ -70,10 +72,12 @@
 /* Begin PBXFileReference section */
 		C42E377B1852E40800D71592 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		C42E377C1852E40800D71592 /* retry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = retry.png; sourceTree = "<group>"; };
+		C42E377F1852F62400D71592 /* level3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = level3.plist; path = ../../level3.plist; sourceTree = "<group>"; };
+		C42E37811852F79900D71592 /* level2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level2.plist; sourceTree = "<group>"; };
 		C455CFD718514C6200E6F281 /* LevelSelectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelectLayer.h; sourceTree = "<group>"; };
 		C455CFD818514C6200E6F281 /* LevelSelectLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSelectLayer.m; sourceTree = "<group>"; };
 		C462F6BA182AFA0100BDF67D /* level1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level1.plist; sourceTree = "<group>"; };
-		C4856BE11851D71B00A7276E /* level2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level2.plist; sourceTree = "<group>"; };
+		C4856BE11851D71B00A7276E /* level4.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level4.plist; sourceTree = "<group>"; };
 		C4933435182232CE00E764BB /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
 		C4933436182232CE00E764BB /* Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grid.m; sourceTree = "<group>"; };
 		C493343818223A0100E764BB /* TileSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TileSpace.h; path = ../TileSpace.h; sourceTree = "<group>"; };
@@ -290,7 +294,9 @@
 				C42E377C1852E40800D71592 /* retry.png */,
 				DCC1A39513A94F1A005BD75D /* config.lua */,
 				C462F6BA182AFA0100BDF67D /* level1.plist */,
-				C4856BE11851D71B00A7276E /* level2.plist */,
+				C42E37811852F79900D71592 /* level2.plist */,
+				C42E377F1852F62400D71592 /* level3.plist */,
+				C4856BE11851D71B00A7276E /* level4.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -406,6 +412,7 @@
 				DCC1A0FA13A94ED5005BD75D /* Default.png in Resources */,
 				DCC1A0FE13A94ED5005BD75D /* Icon-72.png in Resources */,
 				C42E377D1852E40800D71592 /* back.png in Resources */,
+				C42E37801852F62400D71592 /* level3.plist in Resources */,
 				DCC1A10013A94ED5005BD75D /* Icon-Small-50.png in Resources */,
 				C42E377E1852E40800D71592 /* retry.png in Resources */,
 				F926B1FA1852DA35007ACA06 /* keyindirt.png in Resources */,
@@ -414,6 +421,7 @@
 				DCC1A10413A94ED5005BD75D /* Icon-Small@2x.png in Resources */,
 				DCC1A10613A94ED5005BD75D /* Icon.png in Resources */,
 				DCC1A10813A94ED5005BD75D /* Icon@2x.png in Resources */,
+				C42E37821852F79900D71592 /* level2.plist in Resources */,
 				F926B1F21852C6F4007ACA06 /* stone2.png in Resources */,
 				F926B1F01852C6F4007ACA06 /* dirt2.png in Resources */,
 				DCC1A3AF13A94F1A005BD75D /* config.lua in Resources */,
@@ -421,7 +429,7 @@
 				DC21B88B1511078F00FD4891 /* fps_images-hd.png in Resources */,
 				F926B2001852DCD5007ACA06 /* sturdystone.png in Resources */,
 				DC21B88C1511078F00FD4891 /* fps_images-ipadhd.png in Resources */,
-				C4856BE21851D71B00A7276E /* level2.plist in Resources */,
+				C4856BE21851D71B00A7276E /* level4.plist in Resources */,
 				F926B1F81852D8C7007ACA06 /* door.png in Resources */,
 				F926B1F41852D005007ACA06 /* lava1.png in Resources */,
 				DC21B88D1511078F00FD4891 /* fps_images.png in Resources */,
