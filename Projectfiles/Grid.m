@@ -94,6 +94,7 @@ bool endLevel = false;
 //    [self addChild:stopWatchLabel];
 //    [self performSelector:@selector(updateTime) withObject:self afterDelay:0.1];
 //}
+
 -(void) navBarSelection: (CCMenuItem*) navBarItem {
     int navBarParam = navBarItem.tag;
     switch (navBarParam) {
@@ -110,7 +111,7 @@ bool endLevel = false;
     
 //    stopWatchLabel =  [[CCLabelTTF alloc] init];
 //    stopWatchLabel.fontSize = 20;
-//    stopWatchLabel.position = ccp(200, 200);
+//    stopWatchLabel.position = ccp(360, 480);
     running = false;
     key.visible = false;
     hasKey = false;
@@ -172,32 +173,32 @@ bool endLevel = false;
                 UIImage* image = [UIImage imageNamed:@"keyindirt.gif"];
                 CGImageRef imageRef = image.CGImage;
                 CCTexture2D *block = [[CCTexture2D alloc] init];
-                [block initWithCGImage:imageRef resolutionType:kCCResolutioniPhoneRetinaDisplay];
+                [block initWithCGImage:imageRef resolutionType:kCCResolutioniPhone5RetinaDisplay];
                 [block drawInRect:CGRectMake(row + (widthBlock * row), col + (heightBlock * col), widthBlock, heightBlock)];
             } else if ([gameSpace[row][col] isDoor] && [gameSpace[row][col] getNumSteps] > 0) {
                 UIImage* image = [UIImage imageNamed:@"door.png"];
                 CGImageRef imageRef = image.CGImage;
                 CCTexture2D *block = [[CCTexture2D alloc] init];
-                [block initWithCGImage:imageRef resolutionType:kCCResolutioniPhoneRetinaDisplay];
+                [block initWithCGImage:imageRef resolutionType:kCCResolutioniPhone5RetinaDisplay];
                 [block drawInRect:CGRectMake(row + (widthBlock * row), col + (heightBlock * col), widthBlock, heightBlock)];
             } else if ([gameSpace[row][col] getNumSteps] == 2) {
                 UIImage* image = [UIImage imageNamed:@"stone2.png"];
                 CGImageRef imageRef = image.CGImage;
                 CCTexture2D *block = [[CCTexture2D alloc] init];
-                [block initWithCGImage:imageRef resolutionType:kCCResolutioniPhoneRetinaDisplay];
+                [block initWithCGImage:imageRef resolutionType:kCCResolutioniPhone5RetinaDisplay];
                 [block drawInRect:CGRectMake(row + (widthBlock * row), col + (heightBlock * col), widthBlock, heightBlock)];
             } else if ([gameSpace[row][col] getNumSteps] == 3) {
                 UIImage* image = [UIImage imageNamed:@"sturdystone.png"];
                 CGImageRef imageRef = image.CGImage;
                 CCTexture2D *block = [[CCTexture2D alloc] init];
-                [block initWithCGImage:imageRef resolutionType:kCCResolutioniPhoneRetinaDisplay];
+                [block initWithCGImage:imageRef resolutionType:kCCResolutioniPhone5RetinaDisplay];
                 [block drawInRect:CGRectMake(row + (widthBlock * row), col + (heightBlock * col), widthBlock, heightBlock)];
             } else if ([gameSpace[row][col] getNumSteps] <= 0) {
             } else if ([gameSpace[row][col] getNumSteps] == 1) {
                 UIImage* image = [UIImage imageNamed:@"dirt2.png"];
                 CGImageRef imageRef = image.CGImage;
                 CCTexture2D *block = [[CCTexture2D alloc] init];
-                [block initWithCGImage:imageRef resolutionType:kCCResolutioniPhoneRetinaDisplay];
+                [block initWithCGImage:imageRef resolutionType:kCCResolutioniPhone5RetinaDisplay];
                 [block drawInRect:CGRectMake(row + (widthBlock * row), col + (heightBlock * col), widthBlock, heightBlock)];
             }
         }
