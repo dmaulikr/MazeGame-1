@@ -287,8 +287,8 @@
 		DCC1A39413A94F1A005BD75D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C462F6BA182AFA0100BDF67D /* level1.plist */,
 				C42E37811852F79900D71592 /* level2.plist */,
+				C462F6BA182AFA0100BDF67D /* level1.plist */,
 				C42E377F1852F62400D71592 /* level3.plist */,
 				C4856BE11851D71B00A7276E /* level4.plist */,
 				F926B1EA1852C6F4007ACA06 /* Textures */,

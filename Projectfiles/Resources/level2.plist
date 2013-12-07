@@ -2,6 +2,56 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>levelLayout</key>
+	<array>
+		<array>
+			<string>0</string>
+			<string>0</string>
+			<string>0</string>
+			<string>0</string>
+			<string>0</string>
+			<string>0</string>
+		</array>
+		<array>
+			<string>1</string>
+			<string>1</string>
+			<string>1</string>
+			<string>1</string>
+			<string>0</string>
+			<string>0</string>
+		</array>
+		<array>
+			<string>0</string>
+			<string>1</string>
+			<string>1</string>
+			<string>1</string>
+			<string>1</string>
+			<string>1</string>
+		</array>
+		<array>
+			<string>0</string>
+			<string>1</string>
+			<string>1</string>
+			<string>0</string>
+			<string>0</string>
+			<string>0</string>
+		</array>
+	</array>
+	<key>start</key>
+	<array>
+		<string>1</string>
+		<string>0</string>
+	</array>
+	<key>door</key>
+	<array>
+		<string>2</string>
+		<string>5</string>
+	</array>
+	<key>key</key>
+	<array>
+		<integer>2</integer>
+		<integer>3</integer>
+	</array>
 	<key>width</key>
 	<integer>4</integer>
 	<key>height</key>
