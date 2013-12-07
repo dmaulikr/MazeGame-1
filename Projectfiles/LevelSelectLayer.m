@@ -26,11 +26,14 @@
 }
 
 -(void) setUpLevelSelect {
+    NSDictionary* levelsCompleted = [NSDictionary dictionaryWithContentsOfFile:@"levelsCompleted.plist"];
+    
     CCLabelTTF* selectALevelLabel = [CCLabelTTF labelWithString:@"Select A Level" fontName:@"Verdana" fontSize:32];
-    selectALevelLabel.position = ccp(160, 360);
+    selectALevelLabel.position = ccp(160, 380);
     CCLabelTTF* level1 = [CCLabelTTF labelWithString:@"Level 1" fontName:@"Verdana" fontSize:20];
     CCMenuItemLabel* level1label = [CCMenuItemLabel itemWithLabel:level1 target:self selector:@selector(selectLevel:)];
     level1label.tag = 1;
+    if ([levelsCompleted objectForKey:@"level1"]) { }
     CCLabelTTF* level2 = [CCLabelTTF labelWithString:@"Level 2" fontName:@"Verdana" fontSize:20];
     CCMenuItemLabel* level2label = [CCMenuItemLabel itemWithLabel:level2 target:self selector:@selector(selectLevel:)];
     level2label.tag = 2;
