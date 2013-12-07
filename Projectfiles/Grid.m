@@ -12,6 +12,7 @@
 
 CCSprite *runner;
 CCSprite *key;
+NSString *levelFile;
 
 @implementation Grid
 
@@ -30,10 +31,10 @@ bool endLevel = false;
     if ((self = [super init])) {
         
         [self schedule:@selector(nextFrame) interval:DELAY_IN_SECONDS];
-        levelFile = @"level1.plist";
         runner = [CCSprite spriteWithFile:@"runner.png"];
         runner.position = ccp(20, 20);
         runner.scale = 0.3;
+        levelFile = @"level1.plist";
         key = [CCSprite spriteWithFile:@"key.gif"];
         key.position = ccp(20, 20);
         key.scale = 0.5;
@@ -50,6 +51,7 @@ bool endLevel = false;
     CCScene* gameScene = [CCScene node];
     Grid* layer = [Grid node];
     [layer initLevel:level];
+    layer->levelFile = level;
     [gameScene addChild: layer];
     return gameScene;
 }
@@ -99,6 +101,7 @@ bool endLevel = false;
     ccColor4F green = ccc4f(0.0, 0.8, 0.0, 1.0);
     ccColor4F yellow = ccc4f(1.0, 1.0, 0.0, 1.0);
     ccColor4F brown = ccc4f(0.5, 0.25, 0.0, 1.0);
+    ccColor4F purple = ccc4f(1.0, 0.0, 1.0, 1.0);
     int widthBlock = WIDTH_WINDOW / maxX;
     int heightBlock = HEIGHT_WINDOW / maxY;
     
@@ -127,6 +130,8 @@ bool endLevel = false;
                 ccDrawSolidRect(ccp(row + (widthBlock * row), col + (heightBlock * col)), ccp(row + (widthBlock * row) + widthBlock, col + (heightBlock * col) + heightBlock), brown);
             } else if ([gameSpace[row][col] getNumSteps] == 2) {
                 ccDrawSolidRect(ccp(row + (widthBlock * row), col + (heightBlock * col)), ccp(row + (widthBlock * row) + widthBlock, col + (heightBlock * col) + heightBlock), blue);
+            } else if ([gameSpace[row][col] getNumSteps] == 3) {
+                ccDrawSolidRect(ccp(row + (widthBlock * row), col + (heightBlock * col)), ccp(row + (widthBlock * row) + widthBlock, col + (heightBlock * col) + heightBlock), purple);
             } else if ([gameSpace[row][col] getNumSteps] <= 0) {
                 ccDrawSolidRect(ccp(row + (widthBlock * row), col + (heightBlock * col)), ccp(row + (widthBlock * row) + widthBlock, col + (heightBlock * col) + heightBlock), red);
             } else if ([gameSpace[row][col] getNumSteps] == 1) {
@@ -197,9 +202,12 @@ bool endLevel = false;
                 hasCheckpoint = true;
             }
             if ([playerTile isDoor]) {
-                if (hasKey && numTilesLeft) {
+                if (hasKey && numTilesLeft == 1) {
                     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"You won!" message:@"Sweeeeet" delegate:self cancelButtonTitle:@"Replay" otherButtonTitles:@"Back to level select", nil];
                     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:levelFile];
+                    [alert show];
+                } else if (hasKey && numTilesLeft > 1) {
+                    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Door Locked!" message:@"Dudebro you need to break all the tiles" delegate:self cancelButtonTitle:@"Hokay" otherButtonTitles:nil];
                     [alert show];
                 } else {
                     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Door Locked!" message:@"Dudebro you need the key :3" delegate:self cancelButtonTitle:@"Hokay" otherButtonTitles:nil];
