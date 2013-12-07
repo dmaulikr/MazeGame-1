@@ -88,10 +88,7 @@ bool endLevel = false;
 //    elapsed -= secs;
 //    int fraction = elapsed * 10.0;
 //    
-//    [self removeChild:stopWatchLabel];
-//    [stopWatchLabel setString:[NSString
-//                            stringWithFormat:@"%u:%u.%u", mins, secs, fraction]];
-//    [self addChild:stopWatchLabel];
+//    [stopWatchLabel setString:[NSString stringWithFormat:@"%u:%u.%u", mins, secs, fraction]];
 //    [self performSelector:@selector(updateTime) withObject:self afterDelay:0.1];
 //}
 
@@ -110,8 +107,10 @@ bool endLevel = false;
 -(void) initLevel: (NSString*) levelFile {
     
 //    stopWatchLabel =  [[CCLabelTTF alloc] init];
+//    [stopWatchLabel setString:@""];
 //    stopWatchLabel.fontSize = 20;
-//    stopWatchLabel.position = ccp(360, 480);
+//    stopWatchLabel.position = ccp(200, 200);
+//        [self addChild:stopWatchLabel];
     running = false;
     key.visible = false;
     hasKey = false;
@@ -286,6 +285,7 @@ bool endLevel = false;
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
+        [self removeChild:stopWatchLabel];
         [self initLevel:levelFile];
     } else if (buttonIndex == 1) {
         [[CCDirector sharedDirector] replaceScene:[LevelSelectLayer scene]];
